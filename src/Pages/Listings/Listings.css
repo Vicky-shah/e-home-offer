@@ -1193,3 +1193,17 @@ select {
   background-size: cover;
   background-position: center;
 }
+
+/* for filter button */
+
+.filter-button {
+  color: #369;
+  border: 1px solid #369;
+  padding: 8px 16px;
+  position: relative;
+  top: 0;
+  right: auto;
+  letter-spacing: 2px;
+  -webkit-appearance: button;
+  cursor: pointer;
+}

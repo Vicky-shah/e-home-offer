@@ -68,6 +68,9 @@ class Listings extends Component {
       mapData: null,
       cardLoader: false,
       isMapActive: false,
+      // for sorting logic
+      activeSorting: "listPrice",
+      activeSortingOrder: "desc",
     };
     window.scrollTo(0, 0);
   }
@@ -100,7 +103,7 @@ class Listings extends Component {
     axios
       .get(
         bePath +
-          `/propertiesWithAttom?market=${activeMLS}&listingType=${activeType}&pageNumber=${pageNumber}`
+          `/propertiesWithAttom?market=${activeMLS}&listingType=${activeType}&sortField=${this.state.activeSorting}&sortOrder=${this.state.activeSortingOrder}&pageNumber=${pageNumber}`
       )
       .then((res) => {
         this.setState({
@@ -119,6 +122,7 @@ class Listings extends Component {
   };
   loadMapHandler = (activeMLS, activeType) => {
     this.setState({ mapData: null, isMapActive: false });
+
     axios
       .get(
         bePath +
@@ -132,6 +136,7 @@ class Listings extends Component {
         this.setState({ mapData: res.data.result.listing });
       });
   };
+
   filterHandler = (pageNumber) => {
     let search = this.props.history.location.search;
     let parsedSearch = search ? parse(search) : null;
@@ -195,6 +200,7 @@ class Listings extends Component {
             baths +
             "&keyword=" +
             searchText +
+            `&sortField=${this.state.activeSorting}&sortOrder=${this.state.activeSortingOrder}` +
             "&extended=true&detils=true&listingDate=>6/1/2015&pageNumber=" +
             pageNumber,
           config
@@ -298,6 +304,7 @@ class Listings extends Component {
         return;
       }
     }
+
     // new logic for paginated call
     this.loadListingsCard("bright", "Residential", 1);
     // new logic for paginated call ends
@@ -366,6 +373,7 @@ class Listings extends Component {
       error: false,
       isSearched: false,
     });
+
     window.location.href = "/";
   };
   // on pagination Change
@@ -385,7 +393,7 @@ class Listings extends Component {
   };
   // on market change Handler
   changeMarketHandler = (value) => {
-      this.setState({ activeMls: value }, function () {
+    this.setState({ activeMls: value }, function () {
       this.setState({ error: false });
       this.loadListingsCard(value, this.state.newActiveType, 1);
       this.loadMapHandler(value, this.state.newActiveType);
@@ -438,11 +446,22 @@ class Listings extends Component {
         this.setState({ cardLoader: false, error: false });
       });
   };
+
+  // function for sorting logic
+  handleSorting = (value) => {
+    const values = value.split(" ");
+    this.setState({
+      ...this.state,
+      activeSorting: values[0],
+      activeSortingOrder: values[1],
+    });
+  };
+
   render() {
     const {
       onCardClick,
       togglePropertyModal,
-
+      handleSorting,
       handleFormChange,
       closePropertyModal,
     } = this;
@@ -494,37 +513,35 @@ class Listings extends Component {
     return (
       <>
         <MyHeader
-          heading="Looking For A New Home"
-          subHeading="Don’t worry eHomeoffer has you covered with many options"
+          heading='Looking For A New Home'
+          subHeading='Don’t worry eHomeoffer has you covered with many options'
         />
-        <section className="search-form-area">
-          <div className="container-fluid">
-            <div className="right-button">
+        <section className='search-form-area'>
+          <div className='container-fluid'>
+            <div className='right-button'>
               <a
-                href="#"
+                href='#'
                 className={newActiveType == "Residential" && "sale"}
-                onClick={() => this.onChangeTypes("Residential")}
-              >
+                onClick={() => this.onChangeTypes("Residential")}>
                 For Sale
               </a>
               <a
-                href="#"
+                href='#'
                 className={newActiveType == "Rental" && "rent"}
-                onClick={() => this.onChangeTypes("Rental")}
-              >
+                onClick={() => this.onChangeTypes("Rental")}>
                 For Rent
               </a>
             </div>
-            <div className="form-search">
+            <div className='form-search'>
               <form onSubmit={(e) => this.serchSubmitHandler(e)}>
-                <div className="group-form search-form big-search">
+                <div className='group-form search-form big-search'>
                   <input
-                    type="text"
+                    type='text'
                     onChange={handleFormChange}
                     defaultValue={searchText}
-                    name="searchText"
-                    placeholder="Property ID, Name, Delivery address, City, Zip, Sub division, Area"
-                    id="searchText"
+                    name='searchText'
+                    placeholder='Property ID, Name, Delivery address, City, Zip, Sub division, Area'
+                    id='searchText'
                   />
                 </div>
                 {/* <div className='group-form baths-form'>
@@ -537,22 +554,20 @@ class Listings extends Component {
                     <option value='7'>The Shore NJ</option>
                   </select>
                 </div> */}
-                <div className="group-form baths-form">
+                <div className='group-form baths-form'>
                   <select
                     onChange={(e) => this.changeMarketHandler(e.target.value)}
-                    value={this.state.activeMls}
-                  >
-                    <option value="cjmls">Central Jersey</option>
-                    <option value="gsmls">Garden State</option>
-                    <option value="mormls">Monmouth Ocean Regional</option>
-                    <option value="njmls">New Jersey</option>
-                    <option value="bright">Bright</option>
-                    <option value="cmcar">Cape May</option>
-                    <option value="hudson">Hudson City</option>
-                    
+                    value={this.state.activeMls}>
+                    <option value='cjmls'>Central Jersey</option>
+                    <option value='gsmls'>Garden State</option>
+                    <option value='mormls'>Monmouth Ocean Regional</option>
+                    <option value='njmls'>New Jersey</option>
+                    <option value='bright'>Bright</option>
+                    <option value='cmcar'>Cape May</option>
+                    <option value='hudson'>Hudson City</option>
                   </select>
                 </div>
-                <div className="group-form zillow-button-div position-relative">
+                <div className='group-form zillow-button-div position-relative'>
                   <div
                     onClick={() =>
                       this.setState({
@@ -562,8 +577,7 @@ class Listings extends Component {
                         showSqftModal: false,
                       })
                     }
-                    className="zillowButton"
-                  >
+                    className='zillowButton'>
                     {maxPrice || minPrice
                       ? (minPrice
                           ? `$${dollarUSLocale.format(minPrice)}`
@@ -575,18 +589,18 @@ class Listings extends Component {
                       : "Price"}
                   </div>
                   {showPriceModal && (
-                    <div className="priceModal">
-                      <p className="title">Price Range</p>
-                      <div className="d-flex col-12 px-0 flex-wrap">
-                        <div className="col-md-6 col-12 pl-0 mb-2 mb-md-0">
+                    <div className='priceModal'>
+                      <p className='title'>Price Range</p>
+                      <div className='d-flex col-12 px-0 flex-wrap'>
+                        <div className='col-md-6 col-12 pl-0 mb-2 mb-md-0'>
                           <input
-                            type="number"
+                            type='number'
                             value={minPrice ? minPrice : null}
                             onChange={handleFormChange}
-                            name="minPrice"
-                            placeholder="Min"
-                            min="100"
-                            id="minPrice"
+                            name='minPrice'
+                            placeholder='Min'
+                            min='100'
+                            id='minPrice'
                             onFocus={() =>
                               this.setState({
                                 showMinPrice: true,
@@ -597,7 +611,7 @@ class Listings extends Component {
                           {showMinPrice && (
                             <div>
                               {activePropertyType === "sale" ? (
-                                <ul className="priceFilterList">
+                                <ul className='priceFilterList'>
                                   {saleMinPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -606,15 +620,14 @@ class Listings extends Component {
                                           this.setState({
                                             minPrice: price.value,
                                           })
-                                        }
-                                      >
+                                        }>
                                         {price.text}
                                       </li>
                                     );
                                   })}
                                 </ul>
                               ) : (
-                                <ul className="priceFilterList">
+                                <ul className='priceFilterList'>
                                   {rentMinPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -623,8 +636,7 @@ class Listings extends Component {
                                           this.setState({
                                             minPrice: price.value,
                                           })
-                                        }
-                                      >
+                                        }>
                                         {price.text}
                                       </li>
                                     );
@@ -635,15 +647,15 @@ class Listings extends Component {
                           )}
                         </div>
 
-                        <div className="col-md-6 col-12 pr-0 pl-0">
+                        <div className='col-md-6 col-12 pr-0 pl-0'>
                           <input
-                            type="number"
+                            type='number'
                             value={maxPrice ? maxPrice : null}
                             onChange={handleFormChange}
-                            name="maxPrice"
-                            placeholder="Max"
-                            min="100"
-                            id="maxPrice"
+                            name='maxPrice'
+                            placeholder='Max'
+                            min='100'
+                            id='maxPrice'
                             onFocus={() =>
                               this.setState({
                                 showMinPrice: false,
@@ -654,7 +666,7 @@ class Listings extends Component {
                           {showMaxPrice && (
                             <div>
                               {activePropertyType === "sale" ? (
-                                <ul className="priceFilterList">
+                                <ul className='priceFilterList'>
                                   {saleMaxPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -663,15 +675,14 @@ class Listings extends Component {
                                           this.setState({
                                             maxPrice: price.value,
                                           })
-                                        }
-                                      >
+                                        }>
                                         {price.text}
                                       </li>
                                     );
                                   })}
                                 </ul>
                               ) : (
-                                <ul className="priceFilterList">
+                                <ul className='priceFilterList'>
                                   {rentMaxPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -680,8 +691,7 @@ class Listings extends Component {
                                           this.setState({
                                             maxPrice: price.value,
                                           })
-                                        }
-                                      >
+                                        }>
                                         {price.text}
                                       </li>
                                     );
@@ -692,26 +702,25 @@ class Listings extends Component {
                           )}
                         </div>
                       </div>
-                      <div className="filterBottomStrip d-flex justify-content-end">
+                      <div className='filterBottomStrip d-flex justify-content-end'>
                         <div
-                          className="doneButton"
+                          className='doneButton'
                           onClick={() =>
                             this.setState({
                               showPriceModal: !showPriceModal,
                               showMaxPrice: false,
                               showMinPrice: false,
                             })
-                          }
-                        >
+                          }>
                           Done
                         </div>
                       </div>
                     </div>
                   )}
                 </div>
-                <div className="group-form zillow-button-div position-relative">
+                <div className='group-form zillow-button-div position-relative'>
                   <div
-                    className="zillowButton"
+                    className='zillowButton'
                     onClick={() =>
                       this.setState({
                         showBedModal: !showBedModal,
@@ -719,8 +728,7 @@ class Listings extends Component {
                         showHomeFilter: false,
                         showSqftModal: false,
                       })
-                    }
-                  >
+                    }>
                     {beds || baths
                       ? (beds ? `${beds}Bd` : "0bd") +
                         "," +
@@ -729,9 +737,9 @@ class Listings extends Component {
                   </div>
 
                   {showBedModal && (
-                    <div className="priceModal">
-                      <p className="title mb-0">Bedrooms</p>
-                      <div className="bedsSelectRow d-flex flex-wrap">
+                    <div className='priceModal'>
+                      <p className='title mb-0'>Bedrooms</p>
+                      <div className='bedsSelectRow d-flex flex-wrap'>
                         {bedsList &&
                           bedsList.map((bed, index) => {
                             let isSelected = beds === bed.value;
@@ -744,16 +752,15 @@ class Listings extends Component {
                                 onClick={() =>
                                   this.setState({ beds: bed.value })
                                 }
-                                className="bedSelectButtn mb-2 mb-md-0"
-                                key={index}
-                              >
+                                className='bedSelectButtn mb-2 mb-md-0'
+                                key={index}>
                                 {bed.text}
                               </div>
                             );
                           })}
                       </div>
-                      <p className="title mt-4 mb-0">Bedrooms</p>
-                      <div className="bedsSelectRow d-flex flex-wrap">
+                      <p className='title mt-4 mb-0'>Bedrooms</p>
+                      <div className='bedsSelectRow d-flex flex-wrap'>
                         {bedsList &&
                           bedsList.map((bed, index) => {
                             let isSelected = baths === bed.value;
@@ -766,23 +773,21 @@ class Listings extends Component {
                                 onClick={() =>
                                   this.setState({ baths: bed.value })
                                 }
-                                className="bedSelectButtn mb-2 mb-md-0"
-                                key={index}
-                              >
+                                className='bedSelectButtn mb-2 mb-md-0'
+                                key={index}>
                                 {bed.text}
                               </div>
                             );
                           })}
                       </div>
-                      <div className="filterBottomStrip d-flex justify-content-end">
+                      <div className='filterBottomStrip d-flex justify-content-end'>
                         <div
-                          className="doneButton"
+                          className='doneButton'
                           onClick={() =>
                             this.setState({
                               showBedModal: false,
                             })
-                          }
-                        >
+                          }>
                           Done
                         </div>
                       </div>
@@ -790,9 +795,9 @@ class Listings extends Component {
                   )}
                 </div>
 
-                <div className="group-form zillow-button-div position-relative">
+                <div className='group-form zillow-button-div position-relative'>
                   <div
-                    className="zillowButton"
+                    className='zillowButton'
                     onClick={() =>
                       this.setState({
                         showSqftModal: !showSqftModal,
@@ -800,8 +805,7 @@ class Listings extends Component {
                         showBedModal: false,
                         showHomeFilter: false,
                       })
-                    }
-                  >
+                    }>
                     {minSqft || maxSqft
                       ? (minSqft ? `${minSqft}sq.ft` : "Upto") +
                         "-" +
@@ -809,18 +813,18 @@ class Listings extends Component {
                       : "sq.ft"}
                   </div>
                   {showSqftModal && (
-                    <div className="priceModal">
-                      <p className="title">SQFT</p>
-                      <div className="d-flex col-12 px-0 flex-wrap">
-                        <div className="col-12 col-md-12 pl-0 mb-2 mb-md-0">
+                    <div className='priceModal'>
+                      <p className='title'>SQFT</p>
+                      <div className='d-flex col-12 px-0 flex-wrap'>
+                        <div className='col-12 col-md-12 pl-0 mb-2 mb-md-0'>
                           <input
-                            type="number"
+                            type='number'
                             defaultValue={minSqft ? minSqft : null}
                             onChange={handleFormChange}
-                            name="minSqft"
-                            placeholder="Min"
-                            min="100"
-                            id="minSqft"
+                            name='minSqft'
+                            placeholder='Min'
+                            min='100'
+                            id='minSqft'
                             onFocus={() =>
                               this.setState({
                                 showMinSqft: true,
@@ -829,35 +833,32 @@ class Listings extends Component {
                             }
                           />
                           {showMinSqft && (
-                            <ul className="priceFilterList">
+                            <ul className='priceFilterList'>
                               <li
-                                onClick={() => this.setState({ minSqft: "" })}
-                              >
+                                onClick={() => this.setState({ minSqft: "" })}>
                                 Any
                               </li>
                               <li
-                                onClick={() => this.setState({ minSqft: 320 })}
-                              >
+                                onClick={() => this.setState({ minSqft: 320 })}>
                                 320 sq.ft
                               </li>
                               <li
-                                onClick={() => this.setState({ minSqft: 500 })}
-                              >
+                                onClick={() => this.setState({ minSqft: 500 })}>
                                 500 sq.ft
                               </li>
                             </ul>
                           )}
                         </div>
 
-                        <div className="col-12 col-md-12 pr-0 pl-0">
+                        <div className='col-12 col-md-12 pr-0 pl-0'>
                           <input
-                            type="number"
+                            type='number'
                             defaultValue={maxSqft ? maxSqft : null}
                             onChange={handleFormChange}
-                            name="maxSqft"
-                            placeholder="Max"
-                            min="100"
-                            id="maxSqft"
+                            name='maxSqft'
+                            placeholder='Max'
+                            min='100'
+                            id='maxSqft'
                             onFocus={() =>
                               this.setState({
                                 showMinSqft: false,
@@ -866,47 +867,49 @@ class Listings extends Component {
                             }
                           />
                           {showMaxSqft && (
-                            <ul className="priceFilterList">
+                            <ul className='priceFilterList'>
                               <li
-                                onClick={() => this.setState({ maxSqft: 1200 })}
-                              >
+                                onClick={() =>
+                                  this.setState({ maxSqft: 1200 })
+                                }>
                                 1200 sq.ft
                               </li>
                               <li
-                                onClick={() => this.setState({ maxSqft: 1500 })}
-                              >
+                                onClick={() =>
+                                  this.setState({ maxSqft: 1500 })
+                                }>
                                 1500 sq.ft
                               </li>
                               <li
-                                onClick={() => this.setState({ maxSqft: 2000 })}
-                              >
+                                onClick={() =>
+                                  this.setState({ maxSqft: 2000 })
+                                }>
                                 2000 sq.ft
                               </li>
                               <li
-                                onClick={() => this.setState({ maxSqft: 2500 })}
-                              >
+                                onClick={() =>
+                                  this.setState({ maxSqft: 2500 })
+                                }>
                                 2500 sq.ft
                               </li>
                               <li
-                                onClick={() => this.setState({ maxSqft: "" })}
-                              >
+                                onClick={() => this.setState({ maxSqft: "" })}>
                                 Any
                               </li>
                             </ul>
                           )}
                         </div>
                       </div>
-                      <div className="filterBottomStrip d-flex justify-content-end">
+                      <div className='filterBottomStrip d-flex justify-content-end'>
                         <div
-                          className="doneButton"
+                          className='doneButton'
                           onClick={() =>
                             this.setState({
                               showSqftModal: !showSqftModal,
                               showMinSqft: false,
                               showMaxSqft: false,
                             })
-                          }
-                        >
+                          }>
                           Done
                         </div>
                       </div>
@@ -914,15 +917,14 @@ class Listings extends Component {
                   )}
                 </div>
 
-                <div className="group-form submit-button">
-                  <button type="submit">Search</button>
+                <div className='group-form submit-button'>
+                  <button type='submit'>Search</button>
                 </div>
               </form>
               {this.state.isSearched && (
                 <button
                   onClick={() => this.resetSearchFilters()}
-                  className=" ml-md-2 resetButton mt-2 mt-md-0"
-                >
+                  className=' ml-md-2 resetButton mt-2 mt-md-0'>
                   Reset
                 </button>
               )}
@@ -931,19 +933,19 @@ class Listings extends Component {
         </section>
 
         {mapView ? (
-          <section className="listing-sec-area">
-            <div className="container-fluid">
-              <div className="row flex-column-reverse flex-md-row">
-                <div class="col-lg-6 col-md-12 col-sm-12 listing-column">
-                  <div class="listing-inner">
-                    <div class="title-area">
+          <section className='listing-sec-area'>
+            <div className='container-fluid'>
+              <div className='row flex-column-reverse flex-md-row'>
+                <div class='col-lg-6 col-md-12 col-sm-12 listing-column'>
+                  <div class='listing-inner'>
+                    <div class='title-area'>
                       {/* <h3>{this.state.market ? this.state.market : 'Garden State'}, 57701</h3> */}
                       {/* {listingSidedata && listingSidedata.length ? (
                         <h3>{listingSidedata.length}</h3>
                       ) : (
                         <h3>...</h3>
                       )} */}
-                      <div class="right-area">
+                      <div class='right-area'>
                         {/* <p>Select Market</p> */}
                         {/* <select
                           onChange={(e) =>
@@ -961,7 +963,24 @@ class Listings extends Component {
                       </div>
                     </div>
 
-                    <div className="listing-box">
+                    <div className='listing-box'>
+                      <div
+                        className='d-flex justify-content-end '
+                        style={{ marginRight: "0.5rem" }}>
+                        <select
+                          onChange={(e) => handleSorting(e.target.value)}
+                          className='filter-button mb-1'>
+                          <option value=''>--Filter By--</option>
+                          <option value='listPrice desc'>
+                            Price High to Low
+                          </option>
+                          <option value='listPrice asc'>
+                            Price low to high
+                          </option>
+                          <option value='daysOnHJI desc'>Oldest</option>
+                          <option value='daysOnHJI asc'>Neweset</option>
+                        </select>
+                      </div>
                       {!isMapActive && listingSidedata && (
                         <ReactPaginate
                           previousLabel={"Prev"}
@@ -980,12 +999,12 @@ class Listings extends Component {
                         />
                       )}
                       {this.state.error && (
-                        <p className="searchError">
+                        <p className='searchError'>
                           Unable to find results! Please modify your search.
                         </p>
                       )}
                       {isLoader || cardLoader ? (
-                        <div className="row clearfix m-0">
+                        <div className='row clearfix m-0'>
                           <CardLoader />
                           <CardLoader />
                           <CardLoader />
@@ -994,9 +1013,9 @@ class Listings extends Component {
                           <CardLoader />
                         </div>
                       ) : (
-                        <div className="row clearfix m-0">
+                        <div className='row clearfix m-0'>
                           {activeProperty ? (
-                            <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2">
+                            <div className='col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2'>
                               <PropertyCard
                                 propertyValues={activeProperty}
                                 history={history}
@@ -1008,7 +1027,7 @@ class Listings extends Component {
                                 listingSidedata &&
                                 listingSidedata.map((item, x, idx) => {
                                   return (
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2">
+                                    <div className='col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2'>
                                       <PropertyCard
                                         onCardClick={onCardClick}
                                         propertyValues={item}
@@ -1018,7 +1037,7 @@ class Listings extends Component {
                                   );
                                 })
                               ) : (
-                                <div className="row clearfix m-0">
+                                <div className='row clearfix m-0'>
                                   <CardLoader />
                                   <CardLoader />
                                   <CardLoader />
@@ -1034,11 +1053,11 @@ class Listings extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 col-md-12 col-sm-12 map-column">
+                <div className='col-lg-6 col-md-12 col-sm-12 map-column'>
                   {!isLoader ? (
-                    <div className="map-area">
+                    <div className='map-area'>
                       {mapData && !this.state.modalActive && (
-                        <div className="map-box">
+                        <div className='map-box'>
                           <MapProperty
                             loadFromMap={this.loadFromMap}
                             setDataFromMap={this.setDataFromMap}
@@ -1048,8 +1067,8 @@ class Listings extends Component {
                       )}
                     </div>
                   ) : (
-                    <div className="mapPlaceHolder">
-                      <img src={mapPlaceHolder} className="w-100" />
+                    <div className='mapPlaceHolder'>
+                      <img src={mapPlaceHolder} className='w-100' />
                     </div>
                   )}
                 </div>
@@ -1057,33 +1076,33 @@ class Listings extends Component {
             </div>
           </section>
         ) : (
-          <section className="listing-sec-area">
-            <div className="container-fluid">
-              <div className="col-lg-12 col-md-12 col-sm-12 listing-column">
-                <div className="listing-inner">
-                  <div className="title-area">
+          <section className='listing-sec-area'>
+            <div className='container-fluid'>
+              <div className='col-lg-12 col-md-12 col-sm-12 listing-column'>
+                <div className='listing-inner'>
+                  <div className='title-area'>
                     <h3>Rapid City, 57701</h3>
-                    <div className="right-area">
+                    <div className='right-area'>
                       <p>10 Homes</p>
                       <p>
                         Sort by{" "}
-                        <a href="#">
+                        <a href='#'>
                           Relevant Listing{" "}
                           <span>
-                            <img src={image16} alt="" />
+                            <img src={image16} alt='' />
                           </span>
                         </a>
                       </p>
                     </div>
                   </div>
 
-                  <div className="listing-box">
-                    <div className="row clearfix">
+                  <div className='listing-box'>
+                    <div className='row clearfix'>
                       {myProperties ? (
                         myProperties.map((item, x, idx) => {
                           if (x < 100) {
                             return (
-                              <div className="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                              <div className='col-lg-3 col-md-3 col-sm-12 col-xs-12'>
                                 <PropertyCard
                                   propertyValues={item}
                                   history={history}
@@ -1093,7 +1112,7 @@ class Listings extends Component {
                           }
                         })
                       ) : (
-                        <div class="lds-ring">
+                        <div class='lds-ring'>
                           <div></div>
                           <div></div>
                           <div></div>
@@ -1109,10 +1128,9 @@ class Listings extends Component {
         )}
         {
           <Modal
-            modalClassName="property-details"
+            modalClassName='property-details'
             toggle={togglePropertyModal}
-            isOpen={propertyModal}
-          >
+            isOpen={propertyModal}>
             <ModalBody>
               <PropertyDetails
                 blogsData={this.state.blogs}
