@@ -457,6 +457,7 @@ class Listings extends Component {
     });
   };
 
+  
   render() {
     const {
       onCardClick,
