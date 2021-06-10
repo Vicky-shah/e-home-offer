@@ -58,6 +58,7 @@ const PropertyDetails = ({
   const [showDateModal, setShowDateModal] = useState(false);
   const [similarHomes, setSimilarHomes] = useState(null);
   const [mCost, setMCost] = useState(0);
+  const [neighbors, setNeighbors] = useState([]);
 
   // for getting blogs
 
@@ -82,6 +83,15 @@ const PropertyDetails = ({
       setblogs(localBlogs);
     }
   }, [blogsData]);
+
+  useEffect(async () => {
+    if (myProperty) {
+      const neighburhood = await axios.get(
+        `https://krx6un8qv7.execute-api.ap-southeast-1.amazonaws.com/Testing_Stage?latitude=${myProperty.coordinates.latitude}&longitude=${myProperty.coordinates.longitude}`
+      );
+      setNeighbors(neighburhood.data.result);
+    }
+  }, [myProperty]);
 
   useEffect(() => {
     let allDates = [new Date()];
@@ -473,7 +483,7 @@ const PropertyDetails = ({
                       className='mr-1'
                     />
                     {size ? (
-                      <span>{(size / 43560).toFixed(3) + " " + "acres"}</span>
+                      <span>{size + " " + "sqft"}</span>
                     ) : (
                       <>
                         {" "}
@@ -927,7 +937,7 @@ const PropertyDetails = ({
                         <li>
                           <span className='foiYRz'>
                             Lot size:{" "}
-                            {myProperty.lotSize && myProperty.lotSize.sqft} sqft
+                            {myProperty.lotSize && (myProperty.lotSize.sqft/ 43560).toFixed(3)} acres
                           </span>
                         </li>
                         <li>
@@ -1213,8 +1223,21 @@ const PropertyDetails = ({
             {relatedResult && (
               <div className='dHtGQa' id='neighborhood'>
                 <h5 className='dTAnOx dZuCmF'>Neighborhood</h5>
-                {relatedResult && (
-                  <Carousel responsive={responsive}>
+                {
+                  neighbors &&
+                    neighbors.map((singleItem) => {
+                      return (
+                        <div className='d-flex justify-content-around align-items-center'>
+                          <img src={singleItem.icon} className='place-icon' />
+                          <p className='single-place-name'>{singleItem.name}</p>
+                          <p className='distance'>
+                            {singleItem.distance.toFixed(3)} km
+                          </p>
+                        </div>
+                      );
+                    })
+
+                  /* <Carousel responsive={responsive}>
                     {relatedResult &&
                       relatedResult.map((singleRelated, index) => {
                         return (
@@ -1230,8 +1253,8 @@ const PropertyDetails = ({
                           </div>
                         );
                       })}
-                  </Carousel>
-                )}
+                  </Carousel> */
+                }
               </div>
             )}
 

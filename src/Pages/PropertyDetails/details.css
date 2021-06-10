@@ -2159,7 +2159,6 @@ input[type="number"] {
   letter-spacing: 0.5px;
 }
 
-
 /* styles for adding the how many days in the modal against for sale */
 .days {
   left: 42%;
@@ -2168,4 +2167,14 @@ input[type="number"] {
   .days {
     left: 30%;
   }
+}
+
+.place-icon {
+  width: 40px;
+  height: 40px;
+}
+.single-place-name {
+  width: 160px;
+  line-height: 23px;
+  letter-spacing: 1px;
 }
