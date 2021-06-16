@@ -1004,7 +1004,7 @@ class Listings extends Component {
                             Price low to high
                           </option>
                           <option value="daysOnHJI desc">Oldest</option>
-                          <option value="daysOnHJI asc">Neweset</option>
+                          <option value="daysOnHJI asc">Newest</option>
                         </select>
                       </div>
                       {!isMapActive && listingSidedata && (
