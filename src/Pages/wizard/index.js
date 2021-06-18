@@ -93,6 +93,7 @@ const Index = () => {
                       <div className="col-8 px-0">
                         <input
                           className="custom-input"
+                          required
                           onChange={(e) => setName(e.target.value)}
                           defaultValue={name}
                           placeholder="Enter Your First Name"
@@ -106,6 +107,7 @@ const Index = () => {
                       </div>
                       <div className="col-8 px-0">
                         <input
+                          required
                           className=" custom-input"
                           onChange={(e) => setLastName(e.target.value)}
                           defaultValue={lastName}
@@ -120,6 +122,7 @@ const Index = () => {
                       </div>
                       <div className="col-8 px-0">
                         <input
+                          required
                           className=" custom-input"
                           onChange={(e) => setPhone(e.target.value)}
                           defaultValue={phone}
@@ -135,6 +138,7 @@ const Index = () => {
                       <div className="col-8 px-0">
                         <input
                           className=" custom-input"
+                          required
                           type="email"
                           onChange={(e) => setEmail(e.target.value)}
                           defaultValue={email}
