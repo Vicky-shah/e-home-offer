@@ -2,15 +2,14 @@ import "./index.css";
 import { useState, useEffect } from "react";
 import Header from "../../Components/MyHeader";
 import WizardCard from "./wizardCard";
-import cashImage from "../../assets/wizardImages/cash@3x.png";
-import handImage from "../../assets/wizardImages/hand@3x.png";
+import cashImage from "../../assets/images/cash_new.png";
+import handImage from "../../assets/images/req_fen.png";
 import CashSteps from "./cashSteps";
 import FinanceSteps from "./financeSteps";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { bePath } from "../../apiPaths";
 const Index = () => {
-  
   const [step, setStep] = useState(0);
   const [type, setType] = useState("");
   const [name, setName] = useState("");
@@ -75,7 +74,7 @@ const Index = () => {
                 <div className="col-12 col-lg-6 col-xl-6 px-0">
                   {/* <!-- progress bar --> */}
                   <div className="col-12 px-0 progress_container">
-                    <div className="progress px-0 col-3"></div>
+                    <div className="progress px-0 col-3 custom-progress"></div>
                   </div>
                   {/* <!-- title --> */}
                   <div className="title_container pt-5">
@@ -87,65 +86,68 @@ const Index = () => {
                     onSubmit={formSubmitHandler}
                   >
                     {/* <!--first name --> */}
-                    <div className="form-group d-flex justify-content-end">
+                    <div className="form-group d-flex flex-column justify-content-end">
                       <div className="col-4 px-0">
                         <label>First Name</label>
                       </div>
                       <div className="col-8 px-0">
                         <input
-                          className="w-100"
-                          required
+                          className="custom-input"
                           onChange={(e) => setName(e.target.value)}
                           defaultValue={name}
+                          placeholder="Enter Your First Name"
                         />
                       </div>
                     </div>
                     {/* <!--second name --> */}
-                    <div className="form-group d-flex justify-content-end">
+                    <div className="form-group d-flex flex-column justify-content-end">
                       <div className="col-4 px-0">
                         <label>Second Name</label>
                       </div>
                       <div className="col-8 px-0">
                         <input
-                          className="w-100"
-                          required
+                          className=" custom-input"
                           onChange={(e) => setLastName(e.target.value)}
                           defaultValue={lastName}
+                          placeholder="Enter Your Second Name"
                         />
                       </div>
                     </div>
                     {/* <!-- Mobile Number --> */}
-                    <div className="form-group d-flex justify-content-end">
+                    <div className="form-group d-flex flex-column justify-content-end">
                       <div className="col-4 px-0">
                         <label>Mobile Number</label>
                       </div>
                       <div className="col-8 px-0">
                         <input
-                          className="w-100"
-                          required
+                          className=" custom-input"
                           onChange={(e) => setPhone(e.target.value)}
                           defaultValue={phone}
+                          placeholder="Enter Your Mobile Number"
                         />
                       </div>
                     </div>
                     {/* <!-- Email Address --> */}
-                    <div className="form-group d-flex justify-content-end">
+                    <div className="form-group d-flex flex-column justify-content-end">
                       <div className="col-4 px-0">
                         <label>Email Address</label>
                       </div>
                       <div className="col-8 px-0">
                         <input
-                          className="w-100"
+                          className=" custom-input"
                           type="email"
-                          required
                           onChange={(e) => setEmail(e.target.value)}
                           defaultValue={email}
+                          placeholder="Enter Your Email"
                         />
                       </div>
                     </div>
                     {/* <!-- button --> */}
-                    <div className="form-group d-flex justify-content-end py-3">
-                      <button type="submit" className="btn btn-primary px-4">
+                    <div className="form-group d-flex justify-content-end py-3 submit-container">
+                      <button
+                        type="submit"
+                        className="btn btn-primary px-4 custom-submit"
+                      >
                         Next
                       </button>
                     </div>
@@ -165,7 +167,7 @@ const Index = () => {
                 <div class="col-12 col-lg-6 col-xl-6 px-0">
                   {/* <!-- progress bar --> */}
                   <div class="col-12 px-0 progress_container">
-                    <div class="progress px-0 col-4"></div>
+                    <div class="progress px-0 col-5 custom-progress"></div>
                   </div>
                   {/* <!-- title --> */}
                   <div class="title_container pt-5">
@@ -179,45 +181,47 @@ const Index = () => {
                   {/* <!-- boxes --> */}
                   <div class="d-flex justify-content-around py-3">
                     {/* <!-- box1 --> */}
-                    <div class="w_22p">
+                    <div class="w_30p">
                       <div
                         onClick={() => setType("cash")}
-                        class={` px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                        class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                           type === "cash" ? "activeDiv" : ""
                         }`}
+                        style={{ borderRadius: "5px" }}
                       >
-                        <img src={cashImage} />
+                        <img src={cashImage} className="wizard-icon" />
+                        <p class="text-center m-0 py-2 text-secondary custom-p">
+                          All Cash
+                        </p>
                       </div>
-                      <p class="text-center m-0 py-2 text-secondary">
-                        All Cash
-                      </p>
                     </div>
                     {/* <!-- box2 --> */}
-                    <div class="w_22p">
+                    <div class="w_30p">
                       <div
                         onClick={() => setType("finance")}
-                        class={` px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                        class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                           type === "finance" ? "activeDiv" : ""
                         }`}
+                        style={{ borderRadius: "5px" }}
                       >
-                        <img src={handImage} />
+                        <img src={handImage} className="wizard-icon" />
+                        <p class="text-center m-0 py-2 text-secondary custom-p">
+                          Requiring Financing
+                        </p>
                       </div>
-                      <p class="text-center m-0 py-2 text-secondary">
-                        Requiring Financing
-                      </p>
                     </div>
                   </div>
                   <div class="d-flex justify-content-end py-5">
                     <button
                       type="submit"
-                      class="btn btn-primary px-4 mx-3"
+                      class="btn btn-primary px-4 mx-3 custom-botton-color"
                       onClick={() => setStep(0)}
                     >
                       Back
                     </button>
                     <button
                       type="submit"
-                      class="btn btn-primary px-4"
+                      class="btn btn-primary px-4 custom-botton-color"
                       onClick={() => NextStepHandler()}
                     >
                       Next

@@ -2,13 +2,13 @@ import "./index.css";
 import WizardCard from "./wizardCard";
 import { useState } from "react";
 // step 2 images
-import YesImage from "../../assets/wizardImages/yes@3x.png";
-import NoImage from "../../assets/wizardImages/no-stopping@3x.png";
+import YesImage from "../../assets/images/tick.png";
+import NoImage from "../../assets/images/cross_red.png";
 // step 3 images
-import TimeImage from "../../assets/wizardImages/fast@3x.png";
-// step 4 images
-import SaverImage from "../../assets/wizardImages/bankruptcy@3x.png";
-import LoanImage from "../../assets/wizardImages/loan@3x.png";
+import noneImage from "../../assets/images/none.png";
+import percentImage from "../../assets/images/percent.png";
+import calenderImage from "../../assets/images/days.png";
+
 import { useHistory } from "react-router-dom";
 import { emailPath, emailFrom, emailTo } from "../../apiPaths";
 import axios from "axios";
@@ -123,7 +123,7 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-5"></div>
+                <div className="progress px-0 col-7 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -134,33 +134,39 @@ const Index = ({
                 </p>
               </div>
               <div className="d-flex justify-content-around py-3">
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setIsVisited("Yes")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       isVisited === "Yes" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={YesImage} />
+                    <img src={YesImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      Yes
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">Yes</p>
                 </div>
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setIsVisited("No")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       isVisited === "No" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={NoImage} />
+                    <img src={NoImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      No
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">No</p>
                 </div>
               </div>
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(1)}
                 >
                   Back
@@ -168,7 +174,7 @@ const Index = ({
                 <button
                   disabled={!isVisited}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -189,7 +195,7 @@ const Index = ({
           <div class="col-12 px-0 d-flex justify-content-between">
             <div class="col-12 col-lg-6 col-xl-6 px-0">
               <div class="col-12 px-0 progress_container">
-                <div class="progress px-0 col-6"></div>
+                <div class="progress px-0 col-8 custom-progress"></div>
               </div>
               <div class="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -204,64 +210,78 @@ const Index = ({
                 <div class="w_22p">
                   <div
                     onClick={() => setDays("none")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
-                      days === "None" ? "activeDiv" : ""
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
+                      days === "none" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={TimeImage} />
+                    <img src={noneImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      none%
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">none%</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setDays("10%")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       days === "10%" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={TimeImage} />
+                    <img src={percentImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      10%
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">10%</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setDays("60days")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       days === "60days" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={TimeImage} />
+                    <img src={calenderImage} className="wizard-icon" />
+                    <p
+                      class="text-center m-0 py-2 text-secondary custom-p"
+                      style={{ letterSpacing: "unset" }}
+                    >
+                      Within 60 Days
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">
-                    Within 60 Days
-                  </p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setDays("80days")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       days === "80days" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={TimeImage} />
+                    <img src={calenderImage} className="wizard-icon" />
+                    <p
+                      class="text-center m-0 py-2 text-secondary custom-p"
+                      style={{ letterSpacing: "unset" }}
+                    >
+                      Within 80 Days
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">
-                    Within 80 Days
-                  </p>
                 </div>
               </div>
 
               <div class="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  class="btn btn-primary px-4 mx-3"
+                  class="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(2)}
                 >
                   Back
                 </button>
                 <button
                   disabled={!days}
-                  class="btn btn-primary px-4"
+                  class="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -281,7 +301,7 @@ const Index = ({
           <div class="col-12 px-0 d-flex justify-content-between">
             <div class="col-12 col-lg-6 col-xl-6 px-0">
               <div class="col-12 px-0 progress_container">
-                <div class="progress px-0 col-8"></div>
+                <div class="progress px-0 col-9 custom-progress"></div>
               </div>
               <div class="title_container pt-5">
                 <h1>It’s Easy To Make An Offer</h1>
@@ -295,10 +315,11 @@ const Index = ({
                 </div>
                 <div class="col-7 px-0">
                   <input
-                    class="w-100 px-3"
-                    placeholder="$"
+                    className="w-100 px-3 custom-placeHolder custom-input"
+                    placeholder=""
                     defaultValue={cashOffer}
                     onChange={(e) => setCashOffer(e.target.value)}
+                    style={{ padding: "5px" }}
                   />
                 </div>
               </div>
@@ -314,62 +335,75 @@ const Index = ({
                 <div class="w_22p">
                   <div
                     onClick={() => setProvide("none")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
-                      provide === "None" ? "activeDiv" : ""
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
+                      provide === "none" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={SaverImage} />
+                    <img src={noneImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      none
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">none</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setProvide("5%")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       provide === "5%" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={LoanImage} />
+                    <img src={percentImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      5%
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">5%</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setProvide("10%")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       provide === "10%" ? "activeDiv" : ""
                     }`}
+                    style={{
+                      borderRadius: "5px",
+                      paddingInline: "1rem",
+                    }}
                   >
-                    <img src={LoanImage} />
+                    <img src={percentImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      10% Recomended
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">
-                    10% Recomended
-                  </p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setProvide("15%")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       provide === "15%" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={LoanImage} />
+                    <img src={percentImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      15% or More
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">15% or More</p>
                 </div>
               </div>
 
               <div class="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  class="btn btn-primary px-4 mx-3"
+                  class="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(3)}
                 >
                   Back
                 </button>
                 <button
                   type="submit"
-                  class="btn btn-primary px-4"
+                  class="btn btn-primary px-4 custom-botton-color"
                   disabled={!cashOffer || !provide}
                   onClick={() => nextStepHandler()}
                 >
@@ -390,7 +424,7 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-10"></div>
+                <div className="progress px-0 col-10 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -401,33 +435,39 @@ const Index = ({
                 </p>
               </div>
               <div className="d-flex justify-content-around py-3">
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setInspect("Yes")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       inspect === "Yes" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={YesImage} />
+                    <img src={YesImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      Yes
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">Yes</p>
                 </div>
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setInspect("No")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       inspect === "No" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={NoImage} />
+                    <img src={NoImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      No
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">No</p>
                 </div>
               </div>
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(4)}
                 >
                   Back
@@ -435,7 +475,7 @@ const Index = ({
                 <button
                   disabled={!inspect}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -456,7 +496,7 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-10"></div>
+                <div className="progress px-0 col-11 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -467,33 +507,39 @@ const Index = ({
                 </p>
               </div>
               <div className="d-flex justify-content-around py-3">
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setAppraisal("Yes")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       appraisal === "Yes" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={YesImage} />
+                    <img src={YesImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      Yes
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">Yes</p>
                 </div>
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setAppraisal("No")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       appraisal === "No" ? "activeDiv" : ""
                     }`}
+                    style={{ borderRadius: "5px" }}
                   >
-                    <img src={NoImage} />
+                    <img src={NoImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      No
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">No</p>
                 </div>
               </div>
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(5)}
                 >
                   Back
@@ -501,7 +547,7 @@ const Index = ({
                 <button
                   disabled={!appraisal}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   {loading ? "Submitting" : "Submit"}

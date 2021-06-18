@@ -2,17 +2,17 @@ import "./index.css";
 import WizardCard from "./wizardCard";
 import { useState } from "react";
 // step 2 images
-import YesImage from "../../assets/wizardImages/yes@3x.png";
-import NoImage from "../../assets/wizardImages/no-stopping@3x.png";
+import YesImage from "../../assets/images/tick.png";
+import NoImage from "../../assets/images/cross_red.png";
 // step 3 images
-import TimeImage from "../../assets/wizardImages/fast@3x.png";
-import PoorImage from "../../assets/wizardImages/bankruptcy@3x.png";
-import YellowLike from "../../assets/wizardImages/like@3x.png";
-import BlueLike from "../../assets/wizardImages/like-copy@3x.png";
-import GreenLike from "../../assets/wizardImages/like-copy-2@3x.png";
+import PoorImage from "../../assets/images/poor_new.png";
+import FairImage from "../../assets/images/fair.png";
+import Excellent from "../../assets/images/excellent.png";
+import GoodImage from "../../assets/images/good.png";
+import noneImage from "../../assets/images/none.png";
+import percentImage from "../../assets/images/percent.png";
 // step 4 images
-import SaverImage from "../../assets/wizardImages/bankruptcy@3x.png";
-import LoanImage from "../../assets/wizardImages/loan@3x.png";
+import LoanImage from "../../assets/images/loan.png";
 import { useHistory } from "react-router-dom";
 import { emailPath, emailFrom, emailTo } from "../../apiPaths";
 import axios from "axios";
@@ -122,7 +122,6 @@ const Index = ({
         });
 
       return;
-      return;
     }
     setStep(step + 1);
   };
@@ -135,7 +134,7 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-5"></div>
+                <div className="progress px-0 col-5 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -146,33 +145,37 @@ const Index = ({
                 </p>
               </div>
               <div className="d-flex justify-content-around py-3">
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setIsVisited("Yes")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       isVisited === "Yes" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={YesImage} />
+                    <img src={YesImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      Yes
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">Yes</p>
                 </div>
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setIsVisited("No")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       isVisited === "No" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={NoImage} />
+                    <img src={NoImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      No
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">No</p>
                 </div>
               </div>
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(1)}
                 >
                   Back
@@ -180,7 +183,7 @@ const Index = ({
                 <button
                   disabled={!isVisited}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -201,7 +204,7 @@ const Index = ({
           <div class="col-12 px-0 d-flex justify-content-between">
             <div class="col-12 col-lg-6 col-xl-6 px-0">
               <div class="col-12 px-0 progress_container">
-                <div class="progress px-0 col-6"></div>
+                <div class="progress px-0 col-6 custom-progress"></div>
               </div>
               <div class="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -215,67 +218,68 @@ const Index = ({
                 <div class="w_22p">
                   <div
                     onClick={() => setFico("580")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       fico === "580" ? "activeDiv" : ""
                     }`}
+                    style={{ paddingInline: "1rem" }}
                   >
-                    <img src={PoorImage} />
+                    <img src={PoorImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      {"Poor < 580 "}
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">
-                    {"Poor < 580 "}
-                  </p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setFico("580-620")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container p_1_7 left_side_box_contaier ${
                       fico === "580-620" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={YellowLike} />
+                    <img src={FairImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      Fair 580-620
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">
-                    Fair 580-620
-                  </p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setFico("620-700")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container p_1_7 left_side_box_contaier ${
                       fico === "620-700" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={BlueLike} />
+                    <img src={GoodImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      Good 620-700
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">
-                    Good 620-700
-                  </p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setFico("700+")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container p_1_7 left_side_box_contaier ${
                       fico === "700+" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={GreenLike} />
+                    <img src={Excellent} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      Excellent 700 +
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">
-                    Excellent 700 +
-                  </p>
                 </div>
               </div>
               <div class="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  class="btn btn-primary px-4 mx-3"
+                  class="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(2)}
                 >
                   Back
                 </button>
                 <button
                   //   disabled={!days}
-                  class="btn btn-primary px-4"
+                  class="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -295,7 +299,7 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-7"></div>
+                <div className="progress px-0 col-7 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -307,33 +311,37 @@ const Index = ({
                 </p>
               </div>
               <div className="d-flex justify-content-around py-3">
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setContagent("Yes")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       contingent === "Yes" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={YesImage} />
+                    <img src={YesImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      Yes
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">Yes</p>
                 </div>
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setContagent("No")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       contingent === "No" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={NoImage} />
+                    <img src={NoImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      No
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">No</p>
                 </div>
               </div>
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(3)}
                 >
                   Back
@@ -341,7 +349,7 @@ const Index = ({
                 <button
                   //   disabled={!isVisited}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -363,7 +371,7 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-7"></div>
+                <div className="progress px-0 col-8 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -375,33 +383,37 @@ const Index = ({
                 </p>
               </div>
               <div className="d-flex justify-content-around py-3">
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setAlreadySecrured("Yes")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       alreadySecured === "Yes" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={YesImage} />
+                    <img src={YesImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      Yes
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">Yes</p>
                 </div>
-                <div className="w_22p">
+                <div className="w_30p">
                   <div
                     onClick={() => setAlreadySecrured("No")}
-                    className={`px-5 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    className={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       alreadySecured === "No" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={NoImage} />
+                    <img src={NoImage} className="wizard-icon" />
+                    <p className="text-center m-0 py-2 text-secondary custom-p">
+                      No
+                    </p>
                   </div>
-                  <p className="text-center m-0 py-2 text-secondary">No</p>
                 </div>
               </div>
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(4)}
                 >
                   Back
@@ -409,7 +421,7 @@ const Index = ({
                 <button
                   //   disabled={!isVisited}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -430,7 +442,7 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-10"></div>
+                <div className="progress px-0 col-9 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -446,53 +458,63 @@ const Index = ({
                 <div class="w_22p">
                   <div
                     onClick={() => setDownPayment("None")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       downPayment === "None" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={TimeImage} />
+                    <img src={noneImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      None%
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">none%</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setDownPayment("5%")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       downPayment === "5%" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={TimeImage} />
+                    <img src={percentImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      5%
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">5%</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setDownPayment("10%")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       downPayment === "10%" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={TimeImage} />
+                    <img src={percentImage} className="wizard-icon" />
+
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      10%
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">10%</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setDownPayment("20% or more")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container  left_side_box_contaier ${
                       downPayment === "20% or more" ? "activeDiv" : ""
                     }`}
+                    style={{ paddingInline: "0rem" }}
                   >
-                    <img src={TimeImage} />
+                    <img src={percentImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      20% or more
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">20% or more</p>
                 </div>
               </div>
 
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(5)}
                 >
                   Back
@@ -500,7 +522,7 @@ const Index = ({
                 <button
                   //   disabled={!inspect}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -521,7 +543,7 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-9"></div>
+                <div className="progress px-0 col-10 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
@@ -534,10 +556,11 @@ const Index = ({
                 </div>
                 <div class="col-7 px-0">
                   <input
-                    class="w-100 px-3"
-                    placeholder="$"
+                    class="w-100 px-3 custom-placeHolder custom-input"
+                    placeholder=""
                     defaultValue={cashOffer}
                     onChange={(e) => setCashOffer(e.target.value)}
+                    style={{ padding: "5px" }}
                   />
                 </div>
               </div>
@@ -553,55 +576,63 @@ const Index = ({
                 <div class="w_22p">
                   <div
                     onClick={() => setProvide("$1.000")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container p_1_7 left_side_box_contaier ${
                       provide === "$1.000" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={SaverImage} />
+                    <img src={noneImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      $1.000
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">$1.000</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setProvide("$5,000")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container  left_side_box_contaier ${
                       provide === "$5,000" ? "activeDiv" : ""
                     }`}
                   >
-                    <img src={LoanImage} />
+                    <img src={LoanImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      $5,000
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">$5,000</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setProvide("1% of offer")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container  left_side_box_contaier ${
                       provide === "1% of offer" ? "activeDiv" : ""
                     }`}
+                    style={{ paddingInline: "0.3rem" }}
                   >
-                    <img src={LoanImage} />
+                    <img src={LoanImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p">
+                      1% of offer
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">1% of offer</p>
                 </div>
                 <div class="w_22p">
                   <div
                     onClick={() => setProvide("5% of offer +")}
-                    class={`px-4 py-3 d-flex justify-content-center left_side_box_contaier ${
+                    class={`pt-3 pb-1 d-flex flex-column justify-content-center custom-wizard-icon-container left_side_box_contaier ${
                       provide === "5% of offer +" ? "activeDiv" : ""
                     }`}
+                    style={{ paddingInline: "0.3rem" }}
                   >
-                    <img src={LoanImage} />
+                    <img src={LoanImage} className="wizard-icon" />
+                    <p class="text-center m-0 py-2 text-secondary custom-p   ">
+                      5% of offer +
+                    </p>
                   </div>
-                  <p class="text-center m-0 py-2 text-secondary">
-                    5% of offer +
-                  </p>
                 </div>
               </div>
 
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(6)}
                 >
                   Back
@@ -609,7 +640,7 @@ const Index = ({
                 <button
                   disabled={!cashOffer}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -628,10 +659,14 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-10"></div>
+                <div className="progress px-0 col-11 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
+                <h5 style={{ fontSize: "1.2rem", marginBlock: "1rem" }}>
+                  Do you already secured financing to make an offer on this
+                  house?
+                </h5>
               </div>
               <div className="form-check py-2">
                 <input
@@ -641,7 +676,7 @@ const Index = ({
                   onChange={(e) => setEhomeFunding(e.target.checked)}
                 />
                 <label
-                  className="form-check-label font-weight-bold text-muted"
+                  className="form-check-label font_500 text-muted"
                   for="Check1"
                 >
                   By checking this box you agree to have our ehomefunding
@@ -661,7 +696,7 @@ const Index = ({
                   onChange={(e) => setInspection(e.target.checked)}
                 />
                 <label
-                  className="form-check-label font-weight-bold text-muted"
+                  className="form-check-label font_500 text-muted"
                   for="Check1"
                 >
                   By checking this box you understand that a lender may require
@@ -672,13 +707,16 @@ const Index = ({
                   </span>
                 </label>
               </div>
-              <b className="mt-8" style={{ textDecoration: "underline" }}>
+              <b
+                className="mt-8 font_500"
+                style={{ textDecoration: "underline" }}
+              >
                 Please check the required fields
               </b>
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(7)}
                 >
                   Back
@@ -686,7 +724,7 @@ const Index = ({
                 <button
                   disabled={!eHomeFunding || !insepection}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
                   Next
@@ -706,10 +744,14 @@ const Index = ({
           <div className="col-12 px-0 d-flex justify-content-between">
             <div className="col-12 col-lg-6 col-xl-6 px-0">
               <div className="col-12 px-0 progress_container">
-                <div className="progress px-0 col-12"></div>
+                <div className="progress px-0 col-11 custom-progress"></div>
               </div>
               <div className="title_container pt-5">
                 <h1>Make An Offer</h1>
+                <h5 style={{ fontSize: "1.2rem", marginBlock: "1rem" }}>
+                  Do you already secured financing to make an offer on this
+                  house?
+                </h5>
               </div>
               <div className="form-check py-2">
                 <input
@@ -719,7 +761,7 @@ const Index = ({
                   onChange={(e) => setRepresent(e.target.checked)}
                 />
                 <label
-                  className="form-check-label font-weight-bold text-muted"
+                  className="form-check-label font_500 text-muted"
                   for="Check1"
                 >
                   By checking this box you agree to utilize our eHomeoffer
@@ -738,7 +780,7 @@ const Index = ({
                   onChange={(e) => setAgreemnt(e.target.checked)}
                 />
                 <label
-                  className="form-check-label font-weight-bold text-muted"
+                  className="form-check-label font_500 text-muted"
                   for="Check1"
                 >
                   By checking this box you agree that your offer is a legally
@@ -746,13 +788,16 @@ const Index = ({
                   acquire the property based on the terms you presented.
                 </label>
               </div>
-              <b className="mt-8" style={{ textDecoration: "underline" }}>
+              <b
+                className="mt-8 font_500"
+                style={{ textDecoration: "underline" }}
+              >
                 Please check the required fields
               </b>
               <div className="d-flex justify-content-end py-5">
                 <button
                   type="submit"
-                  className="btn btn-primary px-4 mx-3"
+                  className="btn btn-primary px-4 mx-3 custom-botton-color"
                   onClick={() => setStep(8)}
                 >
                   Back
@@ -760,13 +805,10 @@ const Index = ({
                 <button
                   disabled={!represent || !agreement}
                   type="submit"
-                  className="btn btn-primary px-4"
+                  className="btn btn-primary px-4 custom-botton-color"
                   onClick={() => nextStepHandler()}
                 >
-                  {
-                    loading ? "Submitting" : "  Submit"
-                  }
-                
+                  {loading ? "Submitting" : "  Submit"}
                 </button>
               </div>
             </div>

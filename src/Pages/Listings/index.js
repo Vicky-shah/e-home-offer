@@ -105,7 +105,6 @@ class Listings extends Component {
         ` https://ung4jksen5.execute-api.ap-southeast-1.amazonaws.com/SortingApiDeployment?market=${activeMLS}&listingType=${activeType}&activeSorting=${this.state.activeSorting}&activeSortingOrder=${this.state.activeSortingOrder}&pageNumber=${pageNumber}`
       )
       .then((res) => {
-        console.log(res);
         this.setState({
           listingSidedata: res.data.result.listing,
           listingPageNumber: parseInt(res.data.result.currentPage),
