@@ -141,7 +141,7 @@ function MapProperty(props) {
   return (
     <LoadScript
       libraries={libraries}
-      googleMapsApiKey="AIzaSyBhTlkgDDH8kNV8Aj0G65C-n8RN-TlXxy4"
+      googleMapsApiKey="AIzaSyCNkbaUQ49AeNfiisnATf1UlrDixfyPk40"
     >
       <GoogleMap
         id="drawing-manager-example"
