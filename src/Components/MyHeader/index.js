@@ -31,7 +31,7 @@ class MyHeader extends Component {
                           <ul className="navbar-nav align-items-end">
                                 <li className="nav-item">
                                     <Link className={window.location.pathname =='/listings' ? "nav-link text-dark active" : "nav-link text-dark"} to="/listings">
-                                    Search Listings
+                                    Search Listings  - Testing h
                                     </Link>
                                 </li>
                                 <li className="nav-item"><a data-scroll href="#" className="nav-link text-dark">Buy</a></li>
