@@ -1,9 +1,9 @@
 export const bePath =
-  "https://h3ab1hpb6l.execute-api.us-east-1.amazonaws.com/dev";
-export const wpPath = "https://ehomeoffer.wpengine.com/index.php?rest_route=";
-export const wpPath2 = "http://ehomefunding.wpengine.com/index.php?rest_route=";
+  "https://oauh07rq82.execute-api.us-east-1.amazonaws.com/dev";
+export const wpPath = "http://dev1.ehomeoffer.us/index.php?rest_route="; //eHome-Offer - Staging Enviroment
+export const wpPath2 = "http://dev2.ehomeoffer.us/index.php?rest_route="; //eHome-Funding - Staging Enviroment
 export const emailPath =
-  "https://h3ab1hpb6l.execute-api.us-east-1.amazonaws.com/dev/email-notifier";
-export const emailTo = ["waqas@blairallenagency.com"];
-export const emailFrom = "akash.qureshi@gmail.com";
+  "https://oauh07rq82.execute-api.us-east-1.amazonaws.com/dev/email-notifier";
+export const emailTo = ["mauleshp@svaapta.com"];
+export const emailFrom = "noreply2@svaapta-it-ally.com";
 export const mapPath = "https://cell-point.herokuapp.com/getByLocation";
