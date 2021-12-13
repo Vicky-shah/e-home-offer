@@ -227,6 +227,7 @@ const mapStateToProps = (state) => {
     }
   }
   
+  // for dispatch in props
   const mapDispatchToProps = { login, register, toggleLoginModal }
   
 

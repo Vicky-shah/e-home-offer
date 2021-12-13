@@ -25,6 +25,7 @@ const MonthlyCost = ({ myProperty, setMCost }) => {
   });
 
   useEffect(() => {
+    // build setvalues() method with require all values and update the value to respect the tabs   
     setValues(
       myProperty?.listPrice || 0.0,
       taxRate.percentage,
@@ -63,32 +64,41 @@ const MonthlyCost = ({ myProperty, setMCost }) => {
       perMonthInsurance,
     });
 
-    // Now calulating interest values
+    // Now calulating interest values (downPaymentPercentAge)
     let _copy = { ...interestvalues };
     if (downPayment !== interestvalues.downPayment) {
+       // build logic for set the downPaymentPercentAge of downpayment to check with downPayment 
       _copy.downPayment = downPayment;
       _copy.downPaymentPercentAge = parseFloat(
         (downPayment / _homePrice) * 100
       ).toFixed(2);
     } else if (downPaymentPercentAge !== interestvalues.downPaymentPercentAge) {
+      // build logic for set the amount of downpayment to check with downPaymentPercentAge 
       _copy.downPaymentPercentAge = downPaymentPercentAge;
       _copy.downPayment = _homePrice * (downPaymentPercentAge / 100);
     }
     if (_homePrice !== homePrice) {
+      // build logic for set the amount of downpayment.
       _copy.downPaymentPercentAge = 20;
       _copy.downPayment = _homePrice * (20 / 100);
     }
     if (_copy.downPaymentPercentAge < 20) {
+      // under this condition build logic for set amount of mortagePerMonth other wise default set 0
       _copy.mortagePerMonth =
         parseInt(_homePrice) * ((20 - _copy.downPaymentPercentAge) / 24000);
     } else {
       _copy.mortagePerMonth = 0;
     }
+
+    // built remainingCost for after pay the downpayment  
     let remainingCost =
       parseInt(_homePrice) -
       parseInt(_homePrice) * (_copy.downPaymentPercentAge / 100);
 
+    //set same value of interestRate
     _copy.interestRate = interestRate;
+
+    // built the logic for interestPerYear
     let interestPerYear = remainingCost * (interestRate / 100);
 
     _copy.loanProgram = loanProgram;
@@ -97,6 +107,8 @@ const MonthlyCost = ({ myProperty, setMCost }) => {
     let principleInterestPerMonth =
       (remainingCost + principleInterest) / (loanProgram === "15" ? 180 : 360);
     _copy.principleInterestPerMonth = principleInterestPerMonth;
+
+    // update the state as interestvalues 
     setInterestValues(_copy);
 
     // estimated Monthly Cost
@@ -166,6 +178,7 @@ const MonthlyCost = ({ myProperty, setMCost }) => {
                     min="10000"
                     onBlur={(event) =>
                       setValues(
+                        // console.log('event.target.value',event.target.value),
                         parseInt(event.target.value || myProperty.listPrice),
                         taxRate.percentage,
                         homeInsurance.perYearInsurance,
@@ -212,7 +225,8 @@ const MonthlyCost = ({ myProperty, setMCost }) => {
                   </div>
                 </div>
                 <div className="col-5 pl-0 pr-0">
-                  <label className="opac-0">Percentage</label>
+                  {/* <label className="opac-0">Percentage</label> */}
+                  <label>Percentage</label>
                   <div className="position-relative rightInput">
                     <input
                       type="number"

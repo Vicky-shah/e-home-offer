@@ -223,6 +223,7 @@ function MapProperty(props) {
                             lng: item.coordinates.longitude,
                           }}
                         >
+                          {/* on click of marker we getting one popup related perticular property and we can see some details on popup */}
                           {selectedIndex === index && (
                             <InfoWindow className="p-0">
                               <div
@@ -266,7 +267,8 @@ function MapProperty(props) {
             })}
           </>
         )}
-
+        
+        {/* as we create shape of polygon */}
         <DrawingManager
           drawingMode="polygon"
           options={options}

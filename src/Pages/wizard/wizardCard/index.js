@@ -28,6 +28,7 @@ const Index = () => {
       market,
     });
   };
+  // collect the data of wizardProperty
   let pro = localStorage.getItem("wizardProperty");
   useEffect(() => {
     if (pro) {
