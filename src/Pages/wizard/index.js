@@ -240,6 +240,7 @@ const Index = () => {
             </div>
           )}
           {type === "cash" && step > 1 && (
+             // after click on cash image
             <CashSteps
               step={step}
               setStep={setStep}
@@ -252,6 +253,7 @@ const Index = () => {
             />
           )}
           {type === "finance" && step > 1 && (
+            // after click on finance image
             <FinanceSteps
               step={step}
               setStep={setStep}

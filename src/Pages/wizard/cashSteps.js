@@ -28,6 +28,7 @@ const Index = ({
   type,
   property,
 }) => {
+  // replace the value 
   const replaceValue = (text, name, value) => {
     const lastName = name;
     const sol = text.replace(name, value);
@@ -35,9 +36,12 @@ const Index = ({
   };
   const [isVisited, setIsVisited] = useState("Yes");
   const [days, setDays] = useState("None");
+  // step 4
   const [cashOffer, setCashOffer] = useState(null);
   const [provide, setProvide] = useState("None");
+  // step 5
   const [inspect, setInspect] = useState("Yes");
+  // step 6
   const [appraisal, setAppraisal] = useState("Yes");
   const [loading, setLoading] = useState(false);
   let history = useHistory();
@@ -112,6 +116,7 @@ const Index = ({
 
       return;
     }
+    // add one step on click of next button 
     setStep(step + 1);
   };
 
