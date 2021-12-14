@@ -55,7 +55,7 @@
   "scripts": {
     "start": "node server.js",
     "develop": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "set \"GENERATE_SOURCEMAP=false\" && rimraf ./build && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
