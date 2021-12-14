@@ -313,6 +313,7 @@ class Listings extends Component {
     // logic for loading mapData ends
   }
 
+  // for update the value on search box on target event 
   handleFormChange = (event) => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -337,7 +338,10 @@ class Listings extends Component {
         Authorization: "Bearer " + publicToken,
       },
     };
+
+    // modalLoader's flag is set as true 
     this.setState({ modalLoader: true });
+    
     axios
       .get(
         bePath +
@@ -358,10 +362,13 @@ class Listings extends Component {
     this.setState({ propertyModal: true });
   };
 
+  // this handler use for when we submit the form of searching 
   serchSubmitHandler = (e) => {
     e.preventDefault();
     this.filterHandler(1);
   };
+
+  // this function use for reset the value when we put in search box
   resetSearchFilters = () => {
     this.setState({
       searchText: "",
@@ -390,7 +397,8 @@ class Listings extends Component {
       newPage
     );
   };
-  // on market change Handler
+
+  // on market change Handler as select city in the side of searchbox
   changeMarketHandler = (value) => {
     this.setState({ activeMls: value }, function () {
       this.setState({ error: false });
@@ -418,6 +426,8 @@ class Listings extends Component {
       }
     );
   };
+
+  // load map with data using this function 
   loadFromMap = (mapData) => {
     let config = {
       headers: {
@@ -446,7 +456,7 @@ class Listings extends Component {
       });
   };
 
-  // function for sorting logic
+  // function for sorting logic when select filter by option
   handleSorting = (value) => {
     const values = value.split(" ");
     this.setState(
@@ -589,6 +599,7 @@ class Listings extends Component {
                     }
                     className="zillowButton"
                   >
+                    {/* this code for build button of price with onclick code */}
                     {maxPrice || minPrice
                       ? (minPrice
                           ? `$${dollarUSLocale.format(minPrice)}`
@@ -599,6 +610,8 @@ class Listings extends Component {
                           : " Any")
                       : "Price"}
                   </div>
+
+                  {/* display the price modal on click of price button with minimum and maximum price */}
                   {showPriceModal && (
                     <div className="priceModal">
                       <p className="title">Price Range</p>
@@ -619,10 +632,13 @@ class Listings extends Component {
                               })
                             }
                           />
+                           {/* display minimum price on home page near at searchbox */}
                           {showMinPrice && (
                             <div>
                               {activePropertyType === "sale" ? (
                                 <ul className="priceFilterList">
+                                {/* display minimum price on home page near at searchbox and also select value in system */}
+
                                   {saleMinPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -640,6 +656,7 @@ class Listings extends Component {
                                 </ul>
                               ) : (
                                 <ul className="priceFilterList">
+                                   {/* this map for minimum price list display from usagevalue file  */}
                                   {rentMinPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -660,6 +677,7 @@ class Listings extends Component {
                           )}
                         </div>
 
+                        {/* display maximum price on home page near at searchbox */}
                         <div className="col-md-6 col-12 pr-0 pl-0">
                           <input
                             type="number"
@@ -676,10 +694,12 @@ class Listings extends Component {
                               })
                             }
                           />
+                          {/* display maximum price on home page near at searchbox and also select value in system */}
                           {showMaxPrice && (
                             <div>
                               {activePropertyType === "sale" ? (
                                 <ul className="priceFilterList">
+                                  {/* this map for maxprice list display from usagevalue file */}
                                   {saleMaxPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -697,6 +717,7 @@ class Listings extends Component {
                                 </ul>
                               ) : (
                                 <ul className="priceFilterList">
+                                  {/* this map for maxprice list display from usagevalue file  */}
                                   {rentMaxPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -734,6 +755,8 @@ class Listings extends Component {
                     </div>
                   )}
                 </div>
+
+                {/* modal of beds and bathrooms at click on bed and rooms button on home page*/}
                 <div className="group-form zillow-button-div position-relative">
                   <div
                     className="zillowButton"
@@ -759,6 +782,7 @@ class Listings extends Component {
                       <div className="bedsSelectRow d-flex flex-wrap">
                         {bedsList &&
                           bedsList.map((bed, index) => {
+                             {/* this map for beds value display from usagevalue file */}
                             let isSelected = beds === bed.value;
                             return (
                               <div
@@ -778,6 +802,7 @@ class Listings extends Component {
                           })}
                       </div>
                       <p className="title mt-4 mb-0">Bedrooms</p>
+                       {/* here also display the beds from usagevalue file */}
                       <div className="bedsSelectRow d-flex flex-wrap">
                         {bedsList &&
                           bedsList.map((bed, index) => {
@@ -815,6 +840,7 @@ class Listings extends Component {
                   )}
                 </div>
 
+                {/* modal of minSqft and maxSqft at click on bed and rooms button on home page*/}
                 <div className="group-form zillow-button-div position-relative">
                   <div
                     className="zillowButton"
@@ -943,6 +969,8 @@ class Listings extends Component {
                   <button type="submit">Search</button>
                 </div>
               </form>
+
+               {/* this button for select all filter value reset */}
               {this.state.isSearched && (
                 <button
                   onClick={() => this.resetSearchFilters()}
@@ -986,6 +1014,7 @@ class Listings extends Component {
                       </div>
                     </div>
 
+                  {/* use for filter on property listing section */}
                     <div className="listing-box">
                       <div
                         className="d-flex justify-content-end "
@@ -1006,6 +1035,7 @@ class Listings extends Component {
                           <option value="daysOnHJI asc">Newest</option>
                         </select>
                       </div>
+                      {/* build using react paginatoion for set paginate in property view*/}
                       {!isMapActive && listingSidedata && (
                         <ReactPaginate
                           previousLabel={"Prev"}
@@ -1041,6 +1071,7 @@ class Listings extends Component {
                         <div className="row clearfix m-0">
                           {activeProperty ? (
                             <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2">
+                              {/* display the card of property  */}
                               <PropertyCard
                                 propertyValues={activeProperty}
                                 history={history}
@@ -1078,11 +1109,13 @@ class Listings extends Component {
                     </div>
                   </div>
                 </div>
+                {/* display map on home page*/}
                 <div className="col-lg-6 col-md-12 col-sm-12 map-column">
                   {!isLoader ? (
                     <div className="map-area">
                       {mapData && !this.state.modalActive && (
                         <div className="map-box">
+                          {/* display the card of property  */}
                           <MapProperty
                             loadFromMap={this.loadFromMap}
                             setDataFromMap={this.setDataFromMap}
@@ -1151,6 +1184,7 @@ class Listings extends Component {
             </div>
           </section>
         )}
+        {/* this modal for display the property detailswith different component */}
         {
           <Modal
             modalClassName="property-details"

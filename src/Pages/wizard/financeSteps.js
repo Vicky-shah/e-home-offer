@@ -36,20 +36,29 @@ const Index = ({
     const sol = text.replace(name, value);
     return sol.indexOf(name) !== -1 ? replaceValue(sol, lastName, value) : sol;
   };
-  const [isVisited, setIsVisited] = useState("Yes");
-  const [cashOffer, setCashOffer] = useState(null);
-  const [provide, setProvide] = useState("$1.000");
-  const [fico, setFico] = useState("580");
-  const [alreadySecured, setAlreadySecrured] = useState("Yes");
-  const [contingent, setContagent] = useState("Yes");
-  const [downPayment, setDownPayment] = useState("None");
-  // --------
-  const [eHomeFunding, setEhomeFunding] = useState(false);
-  const [insepection, setInspection] = useState(false);
-  const [represent, setRepresent] = useState(false);
-  const [agreement, setAgreemnt] = useState(false);
-  const [loading, setLoading] = useState(false);
-  let history = useHistory();
+// step 2
+const [isVisited, setIsVisited] = useState("Yes");
+// step 3
+const [fico, setFico] = useState("580");
+// step 7
+const [cashOffer, setCashOffer] = useState(null);
+const [provide, setProvide] = useState("$1.000");
+// step 4
+const [contingent, setContagent] = useState("Yes");
+// step 5
+const [alreadySecured, setAlreadySecrured] = useState("Yes");
+// step 6
+const [downPayment, setDownPayment] = useState("None");
+// -------- step 8
+const [eHomeFunding, setEhomeFunding] = useState(false);
+const [insepection, setInspection] = useState(false);
+// ----- step 9
+const [represent, setRepresent] = useState(false);
+const [agreement, setAgreemnt] = useState(false);
+const [loading, setLoading] = useState(false);
+
+// history for store data temparary
+let history = useHistory();
 
   const nextStepHandler = () => {
     if (step === 9) {
@@ -85,6 +94,7 @@ const Index = ({
       </body>
       </html>
       `;
+      // for all value you can replace 
       message = replaceValue(message, "[[link]]", urlReturn(property));
       message = replaceValue(message, "[[name]]", name + " " + lastName);
       message = replaceValue(message, "[[email]]", email);
@@ -103,6 +113,7 @@ const Index = ({
         Subject: "Instant offer for property",
         Message: message,
       };
+      // built this for send mail for instant offer
       axios
         .post(emailPath, data)
         .then((res) => {
@@ -436,6 +447,7 @@ const Index = ({
         </div>
       )}
       {/* Step 5 ends */}
+
       {/* step 6 stars */}
       {step === 6 && (
         <div className="container steps_container px-0 py-5">
@@ -537,6 +549,7 @@ const Index = ({
         </div>
       )}
       {/* step 6 ends */}
+
       {/* step 7 starts */}
       {step === 7 && (
         <div className="container steps_container px-0 py-5">
@@ -654,6 +667,9 @@ const Index = ({
           </div>
         </div>
       )}
+       {/* step 7 ends */}
+
+       {/* step 8 start */}
       {step === 8 && (
         <div className="container steps_container px-0 py-5">
           <div className="col-12 px-0 d-flex justify-content-between">
@@ -738,7 +754,9 @@ const Index = ({
           </div>
         </div>
       )}
-      {/* step 7 ends */}
+      {/* step 8 end */}
+
+      {/* step 9 start */}
       {step === 9 && (
         <div className="container steps_container px-0 py-5">
           <div className="col-12 px-0 d-flex justify-content-between">
@@ -819,6 +837,7 @@ const Index = ({
           </div>
         </div>
       )}
+      {/* step 9 end */}
     </div>
   );
 };
