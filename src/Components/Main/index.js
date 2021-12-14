@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
 import LoginModal from './../LoginModal';
 // import routes from "../../routes/index";
 import PrivateRoute from '../Routes/PrivateRoute';
@@ -67,6 +67,7 @@ class Main extends Component {
 
             <Route exact path='/list' component={ListPage} />
             {/*MainPage*/}
+            <Route exact path='/main-page' component={MainPage} />
             <Route exact path='/' component={Listings} />
             <Route path='/property-view/:title' component={PropertyView} />
             <Route exact path='/login' component={Login} />

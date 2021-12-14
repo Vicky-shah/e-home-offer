@@ -4,6 +4,7 @@ import { put, all, takeLeading, call } from "redux-saga/effects";
 import { apiUrl, publicToken } from "../../config";
 if (localStorage.getItem('jwt')) axios.defaults.headers.common['Authorization'] = `${localStorage.getItem('jwt')}`;
 
+// start the watcher saga for every login time  
 function* loginUser({ payload, history }) {
   console.log('payload', payload);
     const { error, response } = yield call(postCall, { path: "/v1/login", body: payload });
@@ -22,7 +23,9 @@ function* loginUser({ payload, history }) {
       EventBus.publish("error", "Something went wrong on logging user.");
     }
 }
+// end the watcher saga 
 
+// start the worker saga 
 function* getProfile({ payload }) {
   console.log('payload', payload);
     const { error, response } = yield call( getCall, `/api/getProfile` );
@@ -82,6 +85,7 @@ function* fetchByMap({ payload }) {
     }
 }
 
+// this function is working with url
 function* getAllAdverts() {
   yield put({ type: "MAIN_LOADER", payload:true});
   const { error, response } = yield call( getCall, `ws/listings/search?market=gsmls&listingType=Residential&details=true&extended=true&images=true&listingDate=>6/1/2015&pageNumber=1&pageSize=1000`,"https://slipstream.homejunction.com/" );
@@ -185,8 +189,10 @@ function* getAllRental() {
       yield put({ type: "MAIN_LOADER", payload:false});
     }
 }
+// end the worker saga 
 
-
+/* function build for call the all function using one
+   actionWatcher() funtion and this function call using all() method  */
 function* actionWatcher() {
     yield takeLeading("LOGIN_USER", loginUser);
     yield takeLeading("GET_USER", getProfile);
@@ -204,6 +210,7 @@ function* actionWatcher() {
     yield takeLeading("FETCH_ADD_COUNT", fetchAddCount);
 }
 
+// above call the endpoints with post type using getCall methods 
 function postCall({ body, path }) {
 
   // axios.defaults.baseURL = 'http://localhost::1338';
@@ -223,6 +230,7 @@ function postCall({ body, path }) {
     });
 }
 
+// above call the endpoints with get type using getCall methods 
 function getCall(path,baseURL) {
 
   // axios.defaults.baseURL = 'http://localhost::1338';
@@ -276,7 +284,7 @@ function deleteCall(path) {
         });
 }
 
-
+// export rootSaga function with call actionWatcher() function in all() method   
 export default function* rootSaga() {
     yield all([actionWatcher()]);
 }

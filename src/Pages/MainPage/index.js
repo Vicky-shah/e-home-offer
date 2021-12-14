@@ -69,7 +69,8 @@ import { connect } from 'react-redux';
         this.props.fetchAddCount()
       }
 
-    onCardClick = (event, property) => {
+      // on click this function will be call and build the profile-url 
+      onCardClick = (event, property) => {
         event.preventDefault()
         let url =  property.address.street ? property.address.street.split(' ').join('_') : "" + property.address.city ? property.address.city.split(' ').join('_') : "" + property.address.zip.split(' ').join('_')
         this.props.history.push({
@@ -78,6 +79,7 @@ import { connect } from 'react-redux';
         });
     };
 
+    // click on this function with event built the market's listing property but this function and respect that page data not working currently not working   
     onMarketClick = (event, market) => {
      
         // event.preventDefault()
@@ -89,6 +91,7 @@ import { connect } from 'react-redux';
         });
     };
 
+    // this function use for search property with address on click of search button 
     goToSearch = () => {
         const { searchText, market, marketList } = this.state
         var url = ""
@@ -107,6 +110,7 @@ import { connect } from 'react-redux';
          this.setState({[event.target.name]:event.target.value})
     }
 
+    // that is handle the property-type on tab select on befor filter 
     handelPropertyType = (type) => {
         if(type == "buy") {
             this.props.getAllAdverts()
@@ -164,6 +168,7 @@ import { connect } from 'react-redux';
             <section className="page-title banner-home" style={{backgroundImage: `url("https://res.cloudinary.com/sndtech/image/upload/v1609702770/ehome/bg-page-1_kgkrk1.jpg")`}}>
                 <div className="auto-container pt-5">
                     <div className="inner-container clearfix">
+                        {/* this functionality built for search but not working currently */}
                         <div className="title-box">
                             <h1>Let's Bring You Home</h1>
                         </div>
@@ -219,6 +224,7 @@ import { connect } from 'react-redux';
                     </div>
                 </div>
           </section>
+
             <section className="featured-sec">
                 <div className="auto-container">
                     <div className="row">
@@ -344,6 +350,7 @@ import { connect } from 'react-redux';
                 </div>
             </section>
 
+            {/*For listing Of homes(property)*/}
             <section className="listing-home">
                 <div className="auto-container">
                     <div className="row">

@@ -17,6 +17,7 @@ export const PropertyCard = (props) => {
       ? props.propertyValues.address.city.split("Twp.").join("")
       : props.propertyValues.address.city;
 
+  // console.log('props.propertyValues',props.propertyValues);
   let size =
     props?.propertyValues?.size ||
     props?.propertyValues?.building?.size?.bldgsize ||
@@ -136,6 +137,7 @@ export const PropertyCard = (props) => {
 };
 
 const mapStateToProps = (state) => {
+  // console.log('state',state);
   return {
     loginModal: state.loginModal,
   };
