@@ -26,7 +26,7 @@ class Main extends Component {
     EventBus.on('error', this.handleError);
 
     EventBus.on('success', this.handleSuccess);
-    hist.push('/');
+    // hist.push('/');
   }
 
   handleSuccess = (e) =>
@@ -80,7 +80,7 @@ class Main extends Component {
             <Route exact path='/redirecturi' component={RedirectUri} />
             <Route exact path='/homedetails/:key' component={Listings} />
             <Route exact path='/wizard/:id' component={WizardComponent} />
-            <Route path='/' render={({ location }) => <Redirect to={location.hash.replace('#/', '')} />} />
+            {/* <Route path='/' render={({ location }) => <Redirect to={location.hash.replace('#/', '')} />} /> */}
           </Switch>
         {/* </Router> */}
         <LoginModal />
