@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import LoginModal from './../LoginModal';
 // import routes from "../../routes/index";
 import PrivateRoute from '../Routes/PrivateRoute';
@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import EventBus from 'eventing-bus';
 import RedirectUri from '../../Pages/RedirectUrl';
 import WizardComponent from '../../Pages/wizard';
+
 const hist = createBrowserHistory();
 
 class Main extends Component {
@@ -25,6 +26,7 @@ class Main extends Component {
     EventBus.on('error', this.handleError);
 
     EventBus.on('success', this.handleSuccess);
+    hist.push('/');
   }
 
   handleSuccess = (e) =>
@@ -61,14 +63,14 @@ class Main extends Component {
     return (
       <div className='App'>
         <ToastContainer position='bottom-center' autoClose={5000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnVisibilityChange={false} draggable pauseOnHover={false} />
-        <Router history={hist}>
+        {/* <Router> */}
           <Switch>
             <Route exact path='/Favorites' component={FavoritePage} />
 
             <Route exact path='/list' component={ListPage} />
             {/*MainPage*/}
-            <Route exact path='/main-page' component={MainPage} />
             <Route exact path='/' component={Listings} />
+            <Route exact path='/main-page' component={MainPage} />
             <Route path='/property-view/:title' component={PropertyView} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/rent-listing' component={RentListing} />
@@ -78,8 +80,9 @@ class Main extends Component {
             <Route exact path='/redirecturi' component={RedirectUri} />
             <Route exact path='/homedetails/:key' component={Listings} />
             <Route exact path='/wizard/:id' component={WizardComponent} />
+            <Route path='/' render={({ location }) => <Redirect to={location.hash.replace('#/', '')} />} />
           </Switch>
-        </Router>
+        {/* </Router> */}
         <LoginModal />
       </div>
     );
