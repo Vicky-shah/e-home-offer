@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import Main from "./Components/Main";
 import MyFooter from "./Components/MyFooter";
@@ -10,9 +10,13 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import { createBrowserHistory } from 'history';
+
+const hist = createBrowserHistory();
+
 const App = () => {
   return (
-    <Router>
+    <Router history={hist}>
       <div className="App">
         <Main />
         <MyFooter />
