@@ -71,6 +71,7 @@ class Listings extends Component {
       // for sorting logics
       activeSorting: "",
       activeSortingOrder: "",
+      propertyItem: null
     };
     window.scrollTo(0, 0);
   }
@@ -126,11 +127,11 @@ class Listings extends Component {
     axios
       .get(
         bePath +
-          "/mapLocations?market=" +
-          activeMLS +
-          "&listingtype=" +
-          activeType +
-          "&details=true&listingDate=>6/1/2015&images=true&pageNumber=1&pageSize=1000"
+        "/mapLocations?market=" +
+        activeMLS +
+        "&listingtype=" +
+        activeType +
+        "&details=true&listingDate=>6/1/2015&images=true&address.state=NJ&pageNumber=1&pageSize=1000"
       )
       .then((res) => {
         this.setState({ mapData: res.data.result.listing });
@@ -182,26 +183,24 @@ class Listings extends Component {
       axios
         .get(
           bePath +
-            "/searchProperties?market=" +
-            this.state.activeMls +
-            "&listingtype=" +
-            newActiveType +
-            "&beds=" +
-            beds +
-            "&listPrice=" +
-            `${minPrice ? minPrice : 0}:${
-              maxPrice ? maxPrice : 999999999999999999
-            }` +
-            "&size=" +
-            `${minSqft ? minSqft : 0}:${
-              maxSqft ? maxSqft : 999999999999999999
-            }` +
-            "&baths=" +
-            baths +
-            "&keyword=" +
-            searchText +
-            "&extended=true&detils=true&listingDate=>6/1/2015&pageNumber=" +
-            pageNumber,
+          "/searchProperties?market=" +
+          this.state.activeMls +
+          "&listingtype=" +
+          newActiveType +
+          "&beds=" +
+          beds +
+          "&listPrice=" +
+          `${minPrice ? minPrice : 0}:${maxPrice ? maxPrice : 999999999999999999
+          }` +
+          "&size=" +
+          `${minSqft ? minSqft : 0}:${maxSqft ? maxSqft : 999999999999999999
+          }` +
+          "&baths=" +
+          baths +
+          "&keyword=" +
+          searchText +
+          "&extended=true&detils=true&listingDate=>6/1/2015&address.state=NJ&pageNumber=" +
+          pageNumber,
           config
         )
         .then((res) => {
@@ -223,7 +222,7 @@ class Listings extends Component {
     }
   };
 
-  componentWillUnmount() {}
+  componentWillUnmount() { }
   componentDidMount() {
     // Method for external property landing
     const path = this.props.history.location.pathname.split("/");
@@ -341,15 +340,15 @@ class Listings extends Component {
 
     // modalLoader's flag is set as true 
     this.setState({ modalLoader: true });
-    
+
     axios
       .get(
         bePath +
-          "/singleProperty?id=" +
-          id +
-          "&market=" +
-          market +
-          "&details=true&extended=true&images=true",
+        "/singleProperty?id=" +
+        id +
+        "&market=" +
+        market +
+        "&details=true&extended=true&images=true&address.state=NJ",
         config
       )
       .then((res) => {
@@ -437,10 +436,8 @@ class Listings extends Component {
     this.setState({ cardLoader: true, isMapActive: true, error: false });
     axios
       .get(
-        `https://slipstream.homejunction.com/ws/listings/search?details=true&extended=true&images=true&market=${
-          this.state.activeMls
-        }&polygon=${JSON.stringify(mapData)}&listingtype=${
-          this.state.newActiveType
+        `https://slipstream.homejunction.com/ws/listings/search?details=true&extended=true&images=true&market=${this.state.activeMls
+        }&polygon=${JSON.stringify(mapData)}&address.state=NJ&listingtype=${this.state.newActiveType
         }&listingDate=>6/1/2015`,
         config
       )
@@ -602,12 +599,12 @@ class Listings extends Component {
                     {/* this code for build button of price with onclick code */}
                     {maxPrice || minPrice
                       ? (minPrice
-                          ? `$${dollarUSLocale.format(minPrice)}`
-                          : "Upto") +
-                        "-" +
-                        (maxPrice
-                          ? `$${dollarUSLocale.format(maxPrice)}`
-                          : " Any")
+                        ? `$${dollarUSLocale.format(minPrice)}`
+                        : "Upto") +
+                      "-" +
+                      (maxPrice
+                        ? `$${dollarUSLocale.format(maxPrice)}`
+                        : " Any")
                       : "Price"}
                   </div>
 
@@ -632,12 +629,12 @@ class Listings extends Component {
                               })
                             }
                           />
-                           {/* display minimum price on home page near at searchbox */}
+                          {/* display minimum price on home page near at searchbox */}
                           {showMinPrice && (
                             <div>
                               {activePropertyType === "sale" ? (
                                 <ul className="priceFilterList">
-                                {/* display minimum price on home page near at searchbox and also select value in system */}
+                                  {/* display minimum price on home page near at searchbox and also select value in system */}
 
                                   {saleMinPriceValues.map((price, index) => {
                                     return (
@@ -656,7 +653,7 @@ class Listings extends Component {
                                 </ul>
                               ) : (
                                 <ul className="priceFilterList">
-                                   {/* this map for minimum price list display from usagevalue file  */}
+                                  {/* this map for minimum price list display from usagevalue file  */}
                                   {rentMinPriceValues.map((price, index) => {
                                     return (
                                       <li
@@ -771,8 +768,8 @@ class Listings extends Component {
                   >
                     {beds || baths
                       ? (beds ? `${beds}Bd` : "0bd") +
-                        "," +
-                        (baths ? `${baths}Ba` : " 0ba")
+                      "," +
+                      (baths ? `${baths}Ba` : " 0ba")
                       : "Beds & Baths"}
                   </div>
 
@@ -782,7 +779,7 @@ class Listings extends Component {
                       <div className="bedsSelectRow d-flex flex-wrap">
                         {bedsList &&
                           bedsList.map((bed, index) => {
-                             {/* this map for beds value display from usagevalue file */}
+                            {/* this map for beds value display from usagevalue file */ }
                             let isSelected = beds === bed.value;
                             return (
                               <div
@@ -802,7 +799,7 @@ class Listings extends Component {
                           })}
                       </div>
                       <p className="title mt-4 mb-0">Bedrooms</p>
-                       {/* here also display the beds from usagevalue file */}
+                      {/* here also display the beds from usagevalue file */}
                       <div className="bedsSelectRow d-flex flex-wrap">
                         {bedsList &&
                           bedsList.map((bed, index) => {
@@ -855,8 +852,8 @@ class Listings extends Component {
                   >
                     {minSqft || maxSqft
                       ? (minSqft ? `${minSqft}sq.ft` : "Upto") +
-                        "-" +
-                        (maxSqft ? `${maxSqft}sq.ft` : " Any")
+                      "-" +
+                      (maxSqft ? `${maxSqft}sq.ft` : " Any")
                       : "sq.ft"}
                   </div>
                   {showSqftModal && (
@@ -970,7 +967,7 @@ class Listings extends Component {
                 </div>
               </form>
 
-               {/* this button for select all filter value reset */}
+              {/* this button for select all filter value reset */}
               {this.state.isSearched && (
                 <button
                   onClick={() => this.resetSearchFilters()}
@@ -1014,7 +1011,7 @@ class Listings extends Component {
                       </div>
                     </div>
 
-                  {/* use for filter on property listing section */}
+                    {/* use for filter on property listing section */}
                     <div className="listing-box">
                       <div
                         className="d-flex justify-content-end "
@@ -1036,6 +1033,7 @@ class Listings extends Component {
                         </select>
                       </div>
                       {/* build using react paginatoion for set paginate in property view*/}
+                      {/* <Listings itemsPerPage={4} /> */}
                       {!isMapActive && listingSidedata && (
                         <ReactPaginate
                           previousLabel={"Prev"}
@@ -1046,10 +1044,11 @@ class Listings extends Component {
                           disabledClassName={"paginationDisabled"}
                           breakClassName={"paginationBreak"}
                           marginPagesDisplayed={2}
-                          pageRangeDisplayed={5}
+                          pageRangeDisplayed={7}
                           containerClassName={"listingPagination"}
                           onPageChange={this.pageChangeHandler}
                           disableInitialCallback={true}
+                          itemsPerPage={4}
                           initialPage={this.state.listingPageNumber - 1}
                         />
                       )}
@@ -1083,13 +1082,19 @@ class Listings extends Component {
                                 listingSidedata &&
                                 listingSidedata.map((item, x, idx) => {
                                   return (
-                                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2">
-                                      <PropertyCard
-                                        onCardClick={onCardClick}
-                                        propertyValues={item}
-                                        history={history}
-                                      />
-                                    </div>
+                                    item.address.state === 'NJ' ?
+                                      <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 px-2">
+                                        <PropertyCard
+                                          onCardClick={onCardClick}
+                                          propertyValues={item}
+                                          history={history}
+                                        />                                        
+                                      </div>
+                                      : this.state.error && (
+                                        <p className="searchError">
+                                          Unable to find results! Please modify your search.....!!
+                                        </p>
+                                      )
                                   );
                                 })
                               ) : (
