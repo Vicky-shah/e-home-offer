@@ -63,7 +63,7 @@ class Main extends Component {
     return (
       <div className='App'>
         <ToastContainer position='bottom-center' autoClose={5000} hideProgressBar newestOnTop closeOnClick rtl={false} pauseOnVisibilityChange={false} draggable pauseOnHover={false} />
-        {/* <Router> */}
+        <Router history={hist}>
           <Switch>
             <Route exact path='/Favorites' component={FavoritePage} />
 
@@ -82,7 +82,7 @@ class Main extends Component {
             <Route exact path='/wizard/:id' component={WizardComponent} />
             {/* <Route path='/' render={({ location }) => <Redirect to={location.hash.replace('#/', '')} />} /> */}
           </Switch>
-        {/* </Router> */}
+        </Router>
         <LoginModal />
       </div>
     );
