@@ -10,13 +10,10 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-import { createBrowserHistory } from 'history';
-
-const hist = createBrowserHistory();
 
 const App = () => {
   return (
-    <Router history={hist}>
+    <Router>
       <div className="App">
         <Main />
         <MyFooter />
