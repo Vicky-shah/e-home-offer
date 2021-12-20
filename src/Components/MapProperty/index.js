@@ -9,7 +9,6 @@ import {
   InfoWindow,
   Marker,
 } from "@react-google-maps/api";
-import { fetchByMap, addFavourite } from "../../store/actions/Auth";
 import { connect } from "react-redux";
 import "./map.css";
 import image17 from "../../assets/images/17.png";
@@ -199,7 +198,7 @@ function MapProperty(props) {
                                     </div>
                                     <div className="right-content">
                                       <img
-                                        onClick={addFavourite}
+                                        // onClick={addFavourite}
                                         src={image17}
                                         alt=""
                                       />
@@ -249,7 +248,7 @@ function MapProperty(props) {
                                   </div>
                                   <div className="right-content">
                                     <img
-                                      onClick={addFavourite}
+                                      // onClick={addFavourite}
                                       src={image17}
                                       alt=""
                                     />
@@ -294,6 +293,5 @@ const mapStateToProps = (state) => {
     mainLoader: state.loader,
   };
 };
-const mapDispatchToProps = { fetchByMap, addFavourite };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MapProperty);
+export default connect(mapStateToProps)(MapProperty);

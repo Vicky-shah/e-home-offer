@@ -46,8 +46,7 @@ import SearchIcon from '../../assets/images/search-icon.png';
 import {
   getAllAdverts,
   toggleLoginModal,
-  getAllRental,
-  fetchAddCount
+  getAllRental
 } from "../../store/actions/Auth"
 import { connect } from 'react-redux';
 
@@ -66,7 +65,6 @@ import { connect } from 'react-redux';
             ]
         }
         this.props.getAllAdverts()
-        this.props.fetchAddCount()
       }
 
       // on click this function will be call and build the profile-url 
@@ -603,6 +601,6 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = { getAllAdverts, toggleLoginModal, getAllRental, fetchAddCount }
+const mapDispatchToProps = { getAllAdverts, toggleLoginModal, getAllRental }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage)
