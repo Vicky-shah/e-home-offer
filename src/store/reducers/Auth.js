@@ -23,7 +23,7 @@ const Auth = (state = initialState, { type, payload }) => {
     }
 
     case 'MY_USER':
-    console.log('payload', payload);
+    console.log('MY_USER_payload', payload);
     return {
       ...state,
       myUser: payload
@@ -37,33 +37,33 @@ const Auth = (state = initialState, { type, payload }) => {
     };
 
     case 'MY_PROPERTIES':
-    console.log('payload', payload);
+    console.log('MY_PROPERTIES_payload', payload);
     return {
       ...state,
       myProperties: payload
     };
     case 'MAIN_LOADER':
-      console.log('payload', payload);
+      console.log('MAIN_LOADER_payload', payload);
       return {
         ...state,
         loader: payload
       };
     case 'MY_COUNT':
-    console.log('payload', payload);
+    console.log('MY_COUNT_payload', payload);
     return {
       ...state,
       myCount: payload
     };
 
     case 'MY_FAVOURITES':
-    console.log('payload', payload);
+    console.log('MY_FAVOURITES_payload', payload);
     return {
       ...state,
       getFavourites: payload
     };
 
     case 'MY_SINGLE_PROPERTY':
-    console.log('payload', payload);
+    console.log('MY_SINGLE_PROPERTY_payload', payload);
     return {
       ...state,
       myProperty: payload.result,

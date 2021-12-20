@@ -5,9 +5,7 @@ import logo from '../../assets/images/logo.png';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator'
 import { connect } from 'react-redux';
 import {
-    toggleLoginModal,
-    login,
-    register,
+    toggleLoginModal
   } from "../../store/actions/Auth"
 
   class LoginModal extends Component {
@@ -37,7 +35,7 @@ import {
             email: name,
             password,
           }
-          this.props.login({data})
+        //   this.props.login({data})
           this.props.toggleLoginModal(!this.props.loginModal)
         }else{
          
@@ -47,7 +45,7 @@ import {
             email,
             password,
           }
-          this.props.register({data})
+        //   this.props.register({data})
           this.props.toggleLoginModal(!this.props.loginModal)
 
         }
@@ -228,7 +226,7 @@ const mapStateToProps = (state) => {
   }
   
   // for dispatch in props
-  const mapDispatchToProps = { login, register, toggleLoginModal }
+  const mapDispatchToProps = { toggleLoginModal }
   
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginModal)

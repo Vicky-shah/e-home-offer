@@ -6,7 +6,7 @@ import LocationIcon from "../../assets/images/location_icon.png";
 import BedIcon from "../../assets/images/bed_icon.png";
 import BathIcon from "../../assets/images/bath_icon.png";
 import FtIcon from "../../assets/images/ft_icon.png";
-import { addFavourite, toggleLoginModal } from "../../store/actions/Auth";
+import { toggleLoginModal } from "../../store/actions/Auth";
 import { connect } from "react-redux";
 
 export const PropertyCard = (props) => {
@@ -143,7 +143,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { addFavourite, toggleLoginModal };
+const mapDispatchToProps = { toggleLoginModal };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PropertyCard);
 
