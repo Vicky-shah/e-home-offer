@@ -12,7 +12,7 @@ const path = require('path');
 
 require('dotenv').config();
 const app = express();
-const port = process.env.REACT_APP_PORT || 3000;
+const port = process.env.REACT_APP_PORT || 3001;
 
 //The CORS mechanism supports secure cross-origin requests and data transfers between browsers and servers
 app.use(cors());

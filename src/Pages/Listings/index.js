@@ -12,7 +12,6 @@ import ReactPaginate from "react-paginate";
 import CardLoader from "../../Components/mapCardPlaceHolder";
 import {
   getAllAdverts,
-  searchByMarket,
   getAllRental,
 } from "../../store/actions/Auth";
 import { connect } from "react-redux";
@@ -1229,6 +1228,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { getAllAdverts, searchByMarket, getAllRental };
+const mapDispatchToProps = { getAllAdverts, getAllRental };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Listings);
