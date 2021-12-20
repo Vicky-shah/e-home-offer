@@ -26,10 +26,6 @@ import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'
 
 import { Modal, ModalBody } from "reactstrap"
-import {
-  getProfile,
-  getFavourites
-} from "../../store/actions/Auth"
 import { connect } from 'react-redux';
 
 const containerStyle = {
@@ -137,8 +133,7 @@ class FavoritePage extends Component {
     };
 
     componentDidMount(props) {
-      this.props.getProfile()
-      this.props.getFavourites()
+
     }
 
     searchListing = () => {};
@@ -275,8 +270,9 @@ class FavoritePage extends Component {
 // export default GoogleApiWrapper({
 //   apiKey: ('AIzaSyBhTlkgDDH8kNV8Aj0G65C-n8RN-TlXxy4 ')
 // })(FavoritePage);
+
 const mapStateToProps = (state) => {
-  
+  // console.log('fav.state',state);
   return {
     myUser:state.myUser,
     myProperties: state.myProperties,
@@ -284,6 +280,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = { getProfile, getFavourites }
-
-export default connect(mapStateToProps, mapDispatchToProps)(FavoritePage)
+export default connect(mapStateToProps)(FavoritePage)

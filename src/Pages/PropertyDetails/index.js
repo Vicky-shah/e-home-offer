@@ -6,7 +6,6 @@ import { Link, useLocation } from "react-router-dom";
 import { connect } from "react-redux";
 import AdviserCards from "./AdviserCards";
 import {
-  searchProperty,
   toggleLoginModal,
   getAllAdverts,
 } from "../../store/actions/Auth";
@@ -1386,6 +1385,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = { searchProperty, toggleLoginModal, getAllAdverts };
+const mapDispatchToProps = { toggleLoginModal, getAllAdverts };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PropertyDetails);

@@ -31,7 +31,6 @@ import video from '../../assets/images/video.jpg';
 import logo from '../../assets/images/logo.png';
 import favicon from '../../assets/images/favicon.png';
 import {
-  searchProperty,
   toggleLoginModal,
   getAllAdverts
 } from "../../store/actions/Auth"
@@ -182,7 +181,7 @@ class PropertyView extends Component {
           if(this.props.location.state){
             this.setState({propertyType:this.props.location.state})
           }
-          this.props.searchProperty({data})
+        //   this.props.searchProperty({data})
           if(!this.props.myProperties.listings) this.props.getAllAdverts()
           // propertiesData[0].value.map((item) => {
           //     if (item.id == this.props.location.state.id) {
@@ -1619,7 +1618,7 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = { searchProperty, toggleLoginModal, getAllAdverts }
+const mapDispatchToProps = {  toggleLoginModal, getAllAdverts }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PropertyView)
 //
