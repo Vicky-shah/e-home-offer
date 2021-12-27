@@ -228,7 +228,7 @@ import { connect } from 'react-redux';
                     <div className="row">
                         <div className="col-md-12">
                             <div className="sec-tittle text-center style-two">
-                                <h2>We Are Here To Help</h2>
+                                {/* <h2>We Are Here To Help</h2> */}
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-12">
@@ -287,7 +287,7 @@ import { connect } from 'react-redux';
                     <div className="row">
                         <div className="col-12">
                             <div className="sec-tittle text-center mobile">
-                                <h2>Featured Properties</h2>
+                                {/* <h2>Featured Properties</h2> */}
                             </div>
                         </div>
                         {this.props.myProperties != undefined && this.props.myProperties.listings ?
@@ -405,7 +405,7 @@ import { connect } from 'react-redux';
                     <div className="row" style={{justifyContent: "center"}}>
                         <div className="col-md-12">
                             <div className="sec-tittle text-center style-two">
-                                <h2>OUR MARKETS</h2>
+                                {/* <h2>OUR MARKETS</h2> */}
                             </div>
                         </div>
                         {marketList.map( market => {
@@ -538,7 +538,7 @@ import { connect } from 'react-redux';
                  <div className="row">
                       <div className="col-md-12">
                          <div className="sec-tittle text-center style-two">
-                              <h2>Our Latest Blogs </h2>
+                              {/* <h2>Our Latest Blogs </h2> */}
                           </div>
                       </div>
 
