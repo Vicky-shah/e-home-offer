@@ -106,12 +106,12 @@ const PropertyDetails = ({
       axios
         .get(
           bePath +
-            "/searchProperties?market=" +
-            myProperty.market +
-            "&extended=true&listingtype=" +
-            myProperty.listingType +
-            "&details=true&listingDate=>6/1/2015&zip=" +
-            myProperty.xf_postalcode
+          "/searchProperties?market=" +
+          myProperty.market +
+          "&extended=true&listingtype=" +
+          myProperty.listingType +
+          "&details=true&listingDate=>6/1/2015&zip=" +
+          myProperty.xf_postalcode
         )
         .then((res) => {
           if (res.data.result.listing && res.data.result.listing.length) {
@@ -122,12 +122,12 @@ const PropertyDetails = ({
       axios
         .get(
           bePath +
-            "/searchProperties?market=" +
-            myProperty.market +
-            "&extended=true&baths=" +
-            myProperty?.baths?.total +
-            "&details=true&listingDate=>6/1/2015&beds=" +
-            myProperty?.beds
+          "/searchProperties?market=" +
+          myProperty.market +
+          "&extended=true&baths=" +
+          myProperty?.baths?.total +
+          "&details=true&listingDate=>6/1/2015&beds=" +
+          myProperty?.beds
         )
         .then((res) => {
           if (res.data.result.listing && res.data.result.listing.length) {
@@ -143,8 +143,8 @@ const PropertyDetails = ({
       axios
         .get(
           "https://slipstream.homejunction.com/ws/markets/get?id=" +
-            myProperty.market +
-            "&details=true",
+          myProperty.market +
+          "&details=true",
           config
         )
         .then((res) => {
@@ -245,9 +245,8 @@ const PropertyDetails = ({
     myProperty?.size || myProperty?.attomData?.building?.size?.bldgsize || null;
   return (
     <div
-      className={`property-details-content ${
-        modalLoader ? "d-flex justify-content-center align-items-center" : ""
-      }`}>
+      className={`property-details-content ${modalLoader ? "d-flex justify-content-center align-items-center" : ""
+        }`}>
       {/* The absolute div of status */}
       {!modalLoader && (
         <>
@@ -400,7 +399,7 @@ const PropertyDetails = ({
                             {myProperty.address.street}
                             {myProperty.address.street && <br />}
                             {myProperty.address.city &&
-                            myProperty.address.city.indexOf("Twp") !== -1
+                              myProperty.address.city.indexOf("Twp") !== -1
                               ? myProperty.address.city.split("Twp.").join("")
                               : myProperty.address.city}{" "}
                             , {myProperty.address.state}
@@ -571,7 +570,7 @@ const PropertyDetails = ({
                       Facts & Features
                     </a>
                   </li>
-                  <li
+                  {/* <li
                     className='eVYrJu'
                     onClick={() => setActiveMenu("advisors")}>
                     <a
@@ -579,7 +578,7 @@ const PropertyDetails = ({
                       className={`bhJxVt ${activeMenuhandler("advisors")}`}>
                       Contact Advisors
                     </a>
-                  </li>
+                  </li> */}
                   {/* <li
                     className="eVYrJu"
                     onClick={() => setActiveMenu("financing")}
@@ -1112,20 +1111,20 @@ const PropertyDetails = ({
                 </ul>
                 <div className='fQkkzS'></div>
               </div>
-              <div className='ivyodi' id='advisors'>
+              {/* <div className='ivyodi' id='advisors'>
                 <p className='bpPStC' style={{ fontSize: "18px" }}>
                   <strong>Our eHomeoffer Advisors</strong>
                 </p>
-              </div>
+              </div> */}
             </div>
 
-            <div className='jOzrMc'>
+            {/* <div className='jOzrMc'>
               <AdviserCards
                 agentData={agentData}
                 lenderData={lenderData}
                 myProperty={myProperty}
               />
-            </div>
+            </div> */}
 
             <ScheduleCard modalDates={modalDates} myProperty={myProperty} />
             <MonthlyCost myProperty={myProperty} setMCost={setMCost} />
@@ -1224,17 +1223,17 @@ const PropertyDetails = ({
                 <h5 className='dTAnOx dZuCmF'>Neighborhood</h5>
                 {
                   neighbors &&
-                    neighbors.map((singleItem) => {
-                      return (
-                        <div className='d-flex justify-content-around align-items-center'>
-                          <img src={singleItem.icon} className='place-icon' />
-                          <p className='single-place-name'>{singleItem.name}</p>
-                          <p className='distance'>
-                            {singleItem.distance.toFixed(3)} km
-                          </p>
-                        </div>
-                      );
-                    })
+                  neighbors.map((singleItem) => {
+                    return (
+                      <div className='d-flex justify-content-around align-items-center'>
+                        <img src={singleItem.icon} className='place-icon' />
+                        <p className='single-place-name'>{singleItem.name}</p>
+                        <p className='distance'>
+                          {singleItem.distance.toFixed(3)} km
+                        </p>
+                      </div>
+                    );
+                  })
 
                   /* <Carousel responsive={responsive}>
                     {relatedResult &&
@@ -1299,8 +1298,8 @@ const PropertyDetails = ({
                               <p>
                                 {blog.postcontent.length > 150
                                   ? blog.postcontent
-                                      .substring(0, 150)
-                                      .concat("...")
+                                    .substring(0, 150)
+                                    .concat("...")
                                   : blog.postcontent.length}
                               </p>
                             ) : (
