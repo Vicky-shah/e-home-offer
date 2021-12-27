@@ -129,13 +129,13 @@ function MapProperty(props) {
 
   const center = props.coordinates
     ? {
-        lat: props.coordinates.latitude,
-        lng: props.coordinates.longitude,
-      }
+      lat: props.coordinates.latitude,
+      lng: props.coordinates.longitude,
+    }
     : {
-        lat: 40.675641937661645,
-        lng: -74.40732978647165,
-      };
+      lat: 40.675641937661645,
+      lng: -74.40732978647165,
+    };
 
   return (
     <LoadScript
@@ -156,132 +156,138 @@ function MapProperty(props) {
             {props.propertiesList.map((item, index, z) => {
               return (
                 <>
-                  {item.coordinates && (
+                  {item.address.state === "NJ" ? (
                     <>
-                      {item.coordinates.coordinates ? (
-                        <Marker
-                          key={index}
-                          onClick={() => onMarkerClick(item, index)}
-                          title={item.address.street}
-                          id={item.id}
-                          icon={{
-                            url: markerIcon,
-                          }}
-                          position={{
-                            lat: item.coordinates.coordinates[1],
-                            lng: item.coordinates.coordinates[0],
-                          }}
-                        >
-                          {selectedIndex === index &&
-                            !props.coordinates(
-                              <InfoWindow style={styles.padZero}>
-                                <div
-                                  style={{
-                                    background: `url(${item.images[0]}) no-repeat`,
-                                    ...styles.infoWindow,
-                                  }}
-                                >
-                                  <div className="info-content">
-                                    <span>House for Sale</span>
-                                    <div className="left-content">
-                                      <Link
-                                        to={{
-                                          pathname: "/property-view",
-                                          state: { id: item.id },
-                                        }}
-                                        className="name"
-                                      >
-                                        {item.address.street}
-                                      </Link>
-                                      <span>${item.listPrice}</span>
-                                      <span>Est. $321/mo</span>
-                                    </div>
-                                    <div className="right-content">
-                                      <img
-                                        // onClick={addFavourite}
-                                        src={image17}
-                                        alt=""
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </InfoWindow>
-                            )}
-                        </Marker>
-                      ) : (
-                        <Marker
-                          key={index}
-                          onClick={() => onMarkerClick(item, index)}
-                          title={item.address.street}
-                          id={item.id}
-                          icon={{
-                            url: markerIcon,
-                          }}
-                          position={{
-                            lat: item.coordinates.latitude,
-                            lng: item.coordinates.longitude,
-                          }}
-                        >
-                          {/* on click of marker we getting one popup related perticular property and we can see some details on popup */}
-                          {selectedIndex === index && (
-                            <InfoWindow className="p-0">
-                              <div
-                                className="info-Window"
-                                style={{
-                                  background: `url(${item.images[0]}) no-repeat`,
-                                }}
-                              >
-                                <div className="info-content">
-                                  <span>House for Sale</span>
-                                  <div className="left-content">
-                                    <Link
-                                      to={{
-                                        pathname: "/property-view",
-                                        state: { id: item.id },
+                    {/* {console.info('item---NJ',item.address.state)}/ */}
+                      {item.coordinates && (
+                        <>
+                          {item.coordinates.coordinates ? (
+                            <Marker
+                              key={index}
+                              onClick={() => onMarkerClick(item, index)}
+                              title={item.address.street}
+                              id={item.id}
+                              icon={{
+                                url: markerIcon,
+                              }}
+                              position={{
+                                lat: item.coordinates.coordinates[1],
+                                lng: item.coordinates.coordinates[0],
+                              }}
+                            >
+                              {selectedIndex === index &&
+                                !props.coordinates(
+                                  <InfoWindow style={styles.padZero}>
+                                    <div
+                                      style={{
+                                        background: `url(${item.images[0]}) no-repeat`,
+                                        ...styles.infoWindow,
                                       }}
-                                      className="name"
                                     >
-                                      {item.address.street}
-                                    </Link>
-                                    <span>${item.listPrice}</span>
-                                    <span>Est. $321/mo</span>
+                                      <div className="info-content">
+                                        <span>House for Sale</span>
+                                        <div className="left-content">
+                                          <Link
+                                            to={{
+                                              pathname: "/property-view",
+                                              state: { id: item.id },
+                                            }}
+                                            className="name"
+                                          >
+                                            {item.address.street}
+                                          </Link>
+                                          <span>${item.listPrice}</span>
+                                          <span>Est. $321/mo</span>
+                                        </div>
+                                        <div className="right-content">
+                                          <img
+                                            // onClick={addFavourite}
+                                            src={image17}
+                                            alt=""
+                                          />
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </InfoWindow>
+                                )}
+                            </Marker>
+                          ) : (
+                            <Marker
+                              key={index}
+                              onClick={() => onMarkerClick(item, index)}
+                              title={item.address.street}
+                              id={item.id}
+                              icon={{
+                                url: markerIcon,
+                              }}
+                              position={{
+                                lat: item.coordinates.latitude,
+                                lng: item.coordinates.longitude,
+                              }}
+                            >
+                              {/* on click of marker we getting one popup related perticular property and we can see some details on popup */}
+                              {selectedIndex === index && (
+                                <InfoWindow className="p-0">
+                                  <div
+                                    className="info-Window"
+                                    style={{
+                                      background: `url(${item.images[0]}) no-repeat`,
+                                    }}
+                                  >
+                                    <div className="info-content">
+                                      <span>House for Sale</span>
+                                      <div className="left-content">
+                                        <Link
+                                          to={{
+                                            pathname: "/property-view",
+                                            state: { id: item.id },
+                                          }}
+                                          className="name"
+                                        >
+                                          {item.address.street}
+                                        </Link>
+                                        <span>${item.listPrice}</span>
+                                        <span>Est. $321/mo</span>
+                                      </div>
+                                      <div className="right-content">
+                                        <img
+                                          // onClick={addFavourite}
+                                          src={image17}
+                                          alt=""
+                                        />
+                                      </div>
+                                    </div>
                                   </div>
-                                  <div className="right-content">
-                                    <img
-                                      // onClick={addFavourite}
-                                      src={image17}
-                                      alt=""
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            </InfoWindow>
+                                </InfoWindow>
+                              )}
+                            </Marker>
                           )}
-                        </Marker>
+                        </>
                       )}
                     </>
-                  )}
+
+                  ) : ''}
                 </>
               );
             })}
           </>
         )}
-        
+
         {/* as we create shape of polygon */}
         <DrawingManager
           drawingMode="polygon"
           options={options}
           onPolygonComplete={onPolygonComplete}
-          // overlaycomplete={(poly) => {
-          //     const polyArray = poly.getPath().getArray();
-          //     let paths = [];
-          //     polyArray.forEach(function (path) {
-          //         paths.push({
-          //             longitude: path.lng(),
-          //             latitude: path.lat()
-          //         });
-          //     });
-          // }}
+        // overlaycomplete={(poly) => {
+        //     const polyArray = poly.getPath().getArray();
+        //     let paths = [];
+        //     polyArray.forEach(function (path) {
+        //         paths.push({
+        //             longitude: path.lng(),
+        //             latitude: path.lat()
+        //         });
+        //     });
+        // }}
         />
       </GoogleMap>
     </LoadScript>
