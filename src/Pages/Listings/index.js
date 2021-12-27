@@ -59,7 +59,7 @@ class Listings extends Component {
       minSqft: "",
       maxSqft: "",
       showSqftModal: false,
-      activeMls: "bright",
+      activeMls: "cjmls",
       newActiveType: "Residential",
       listingPageNumber: 1,
       listingSidedata: null,
@@ -303,7 +303,7 @@ class Listings extends Component {
     }
 
     // new logic for paginated call
-    this.loadListingsCard("bright", "Residential", 1);
+    this.loadListingsCard("cjmls", "Residential", 1);
     // new logic for paginated call ends
 
     // logic for loading mapData
@@ -753,7 +753,7 @@ class Listings extends Component {
                 </div>
 
                 {/* modal of beds and bathrooms at click on bed and rooms button on home page*/}
-                <div className="group-form zillow-button-div position-relative">
+                {/* <div className="group-form zillow-button-div position-relative">
                   <div
                     className="zillowButton"
                     onClick={() =>
@@ -770,16 +770,16 @@ class Listings extends Component {
                       "," +
                       (baths ? `${baths}Ba` : " 0ba")
                       : "Beds & Baths"}
-                  </div>
+                  </div> */}
 
-                  {showBedModal && (
+                  {/* {showBedModal && (
                     <div className="priceModal">
                       <p className="title mb-0">Bedrooms</p>
                       <div className="bedsSelectRow d-flex flex-wrap">
                         {bedsList &&
-                          bedsList.map((bed, index) => {
+                          bedsList.map((bed, index) => { */}
                             {/* this map for beds value display from usagevalue file */ }
-                            let isSelected = beds === bed.value;
+                            {/* let isSelected = beds === bed.value;
                             return (
                               <div
                                 style={{
@@ -796,10 +796,10 @@ class Listings extends Component {
                               </div>
                             );
                           })}
-                      </div>
-                      <p className="title mt-4 mb-0">Bedrooms</p>
+                      </div> */}
+                      {/* <p className="title mt-4 mb-0">Bedrooms</p> */}
                       {/* here also display the beds from usagevalue file */}
-                      <div className="bedsSelectRow d-flex flex-wrap">
+                      {/* <div className="bedsSelectRow d-flex flex-wrap">
                         {bedsList &&
                           bedsList.map((bed, index) => {
                             let isSelected = baths === bed.value;
@@ -834,7 +834,7 @@ class Listings extends Component {
                       </div>
                     </div>
                   )}
-                </div>
+                </div> */}
 
                 {/* modal of minSqft and maxSqft at click on bed and rooms button on home page*/}
                 <div className="group-form zillow-button-div position-relative">
