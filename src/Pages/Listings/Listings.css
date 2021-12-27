@@ -101,7 +101,7 @@ select {
   right: auto;
   width: 224px;
   height: 2px;
-  background-color: #5fc3ac;
+  background-color: #5fc3ac;/**/
   bottom: -5px;
 }
 .blog-sec .sec-tittle h2:before {
