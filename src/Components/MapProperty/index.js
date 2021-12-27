@@ -158,7 +158,7 @@ function MapProperty(props) {
                 <>
                   {item.address.state === "NJ" ? (
                     <>
-                    {/* {console.info('item---NJ',item.address.state)} */}
+                    {/* {console.info('item---NJ',item.address.state)}/ */}
                       {item.coordinates && (
                         <>
                           {item.coordinates.coordinates ? (
