@@ -81,7 +81,7 @@ class RentListing extends Component {
                               <div className="col-md-12">
                                   <div className="sec-tittle text-center">
                                       <h2>Interactive</h2>
-                                      {/* <h3>MAP</h3> */}
+                                      <h3>MAP</h3>
                                   </div>
                               </div>
                           </div>

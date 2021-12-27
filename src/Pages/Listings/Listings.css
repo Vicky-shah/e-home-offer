@@ -72,8 +72,7 @@ select {
 
 .sec-tittle {
   position: relative;
-  /* padding-bottom: 40px; */
-  padding: 97px 7px;
+  padding-bottom: 40px;
 }
 
 .sec-tittle h2 {
@@ -179,7 +178,7 @@ select {
 
 .form-search {
   position: relative;
-  margin: 34px 0;
+  margin: 0;
   padding: 40px 20px;
   box-shadow: 0.278px 1.981px 8px rgba(0, 0, 0, 0.06);
   background-color: #ffffff;
