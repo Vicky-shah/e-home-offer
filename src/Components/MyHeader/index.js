@@ -52,7 +52,7 @@ class MyHeader extends Component {
                   </div>
               </nav>
              </header>
-                {/* <section className="page-title">
+                <section className="page-title">
                     <div className="auto-container">
                         <div className="inner-container clearfix">
                             <div className="title-box">
@@ -60,9 +60,9 @@ class MyHeader extends Component {
                                     {heading
                                         ? heading
                                         : "eHome Offers Stress-Free Home Buying"}
-                                </h1> */}
+                                </h1>
                                 {/* <p>Presented by: <a href="#">Faith Lewis </a> with Keller Williams Realty Black Hills </p>*/}
-                                {/* <p>
+                                <p>
                                     {" "}
                                     {subHeading
                                         ? subHeading
@@ -72,7 +72,7 @@ class MyHeader extends Component {
                             </div>
                         </div>
                     </div>
-                </section> */}
+                </section>
             </div>
         );
     }
