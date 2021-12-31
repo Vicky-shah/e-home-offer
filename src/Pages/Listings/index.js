@@ -6,7 +6,7 @@ import MapProperty from "../../Components/MapProperty";
 import PropertyDetails from "./../PropertyDetails";
 import image16 from "../../assets/images/16.png";
 import { Modal, ModalBody } from "reactstrap";
-import { bePath, wpPath, wpPath2 } from "../../apiPaths";
+import { bePath, wpPath, wpPath2, permitPath } from "../../apiPaths";
 import axios from "axios";
 import ReactPaginate from "react-paginate";
 import CardLoader from "../../Components/mapCardPlaceHolder";
@@ -70,7 +70,8 @@ class Listings extends Component {
       // for sorting logics
       activeSorting: "",
       activeSortingOrder: "",
-      propertyItem: null
+      propertyItem: null,
+      singleProperty: null
     };
     window.scrollTo(0, 0);
   }
@@ -102,7 +103,7 @@ class Listings extends Component {
     });
     axios
       .get(
-        ` https://ung4jksen5.execute-api.ap-southeast-1.amazonaws.com/SortingApiDeployment?market=${activeMLS}&listingType=${activeType}&activeSorting=${this.state.activeSorting}&activeSortingOrder=${this.state.activeSortingOrder}&pageNumber=${pageNumber}`
+        ` https://oauh07rq82.execute-api.us-east-1.amazonaws.com/dev/propertiesListing?market=${activeMLS}&listingType=${activeType}&activeSorting=${this.state.activeSorting}&activeSortingOrder=${this.state.activeSortingOrder}&pageNumber=${pageNumber}`
       )
       .then((res) => {
         this.setState({
@@ -328,6 +329,7 @@ class Listings extends Component {
       this.props.history.replace(`/homedetails/${url}`, {
         propertyId: id,
         market,
+        address: this.state.singleProperty,
       });
     }
 
@@ -351,7 +353,7 @@ class Listings extends Component {
         config
       )
       .then((res) => {
-        this.setState({ modalActive: res.data.result.listing[0] });
+        this.setState({ modalActive: res.data.result.listing[0], singleProperty: res.data.result.listing[0] });
         setTimeout(() => {
           this.setState({ modalLoader: false });
         }, 1000);
@@ -772,14 +774,14 @@ class Listings extends Component {
                       : "Beds & Baths"}
                   </div> */}
 
-                  {/* {showBedModal && (
+                {/* {showBedModal && (
                     <div className="priceModal">
                       <p className="title mb-0">Bedrooms</p>
                       <div className="bedsSelectRow d-flex flex-wrap">
                         {bedsList &&
                           bedsList.map((bed, index) => { */}
-                            {/* this map for beds value display from usagevalue file */ }
-                            {/* let isSelected = beds === bed.value;
+                {/* this map for beds value display from usagevalue file */}
+                {/* let isSelected = beds === bed.value;
                             return (
                               <div
                                 style={{
@@ -797,9 +799,9 @@ class Listings extends Component {
                             );
                           })}
                       </div> */}
-                      {/* <p className="title mt-4 mb-0">Bedrooms</p> */}
-                      {/* here also display the beds from usagevalue file */}
-                      {/* <div className="bedsSelectRow d-flex flex-wrap">
+                {/* <p className="title mt-4 mb-0">Bedrooms</p> */}
+                {/* here also display the beds from usagevalue file */}
+                {/* <div className="bedsSelectRow d-flex flex-wrap">
                         {bedsList &&
                           bedsList.map((bed, index) => {
                             let isSelected = baths === bed.value;
@@ -1087,7 +1089,7 @@ class Listings extends Component {
                                           onCardClick={onCardClick}
                                           propertyValues={item}
                                           history={history}
-                                        />                                        
+                                        />
                                       </div>
                                       : this.state.error && (
                                         <p className="searchError">
