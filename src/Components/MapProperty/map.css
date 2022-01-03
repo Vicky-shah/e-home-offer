@@ -1,67 +1,31 @@
-#drawing-manager-example {
-    height: 100% !important;
+.mapboxgl-popup {
+    max-width: 200px !important;
+    max-height: 120px !important;
+    font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif !important;
+    /* display: flex;
+    will-change: transform; */
 }
-.gm-style .gm-style-iw-d,
-.gm-style .gm-style-iw-c{
-    padding: 0;
-    overflow: hidden !important;
+.mapboxgl-canvas {
+    position: relative !important;
 }
-
-
-.info-Window {
-    padding: 20px;
-    color: #ffffff;
-    position: relative;
+.map-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
 }
-
-.info-Window::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.4);
-}
-
-.info-Window .info-content {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.info-Window .info-content >span {
-    width: 100%;
-    margin: 0 0 30px;
-}
-
-.info-Window .info-content .left-content .name {
-     color: #ffffff;
-     font-size: 18px;
-     font-weight: 400;
-     display: block;
-}
-
-.info-Window .info-content .left-content span {
-   display: inline-block;
-   margin: 10px 10px 0 0;
-}
-
-.listing-sec-area .map-column .map-area .map-box .info-Window .info-content .right-content img {
-   width: 30px;
-   height: auto;
-   cursor: pointer;
-}
-
-.listing-sec-area .map-column .map-area .map-box .gm-ui-hover-effect {
-    top: 0px !important;
-    right: 0px !important;
-    opacity: 1 !important;
-}
-.listing-sec-area .map-column .map-area .map-box .gm-ui-hover-effect img {
-    filter: invert(98%) sepia(79%) saturate(2%) hue-rotate(17deg) brightness(115%) contrast(100%);
-    width: 16px !important;
-    height: 16px !important;
-}
+.mapboxgl-popup-content.leaflet {
+    width: 35% !important;
+    display: inline-block !important;
+    }
+  .mapboxgl-popup-content.rightlet {
+    width: 60% !important;
+    display: inline-block !important;
+    height: auto;
+    object-fit: cover;
+    }
+    .mapboxgl-popup-content{
+      padding: 5px 8px 5px !important;
+    }
+  
