@@ -1132,7 +1132,7 @@ class Listings extends Component {
                     </div>
                   ) : (
                     <div className="mapPlaceHolder">
-                      <img src={mapPlaceHolder} className="w-100" />
+                      {/* <CardLoader/> */}
                     </div>
                   )}
                 </div>
