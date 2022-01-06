@@ -7,3 +7,5 @@ export const emailPath =
 export const emailTo = ["mauleshp@svaapta.com"];
 export const emailFrom = "noreply2@svaapta-it-ally.com";
 export const mapPath = "https://cell-point.herokuapp.com/getByLocation";
+export const permitPath = "http://3.131.211.66/eHomeRedesign/api";
+export const mapboxToken = "pk.eyJ1IjoiZWhvbWVvZmZlcm1hcHMiLCJhIjoiY2tqaW5mZGp6N282OTMycngzMjVveTR1byJ9.GO2cn4EGL2Q-78KiKa-z9g";
