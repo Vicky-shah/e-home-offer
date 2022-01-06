@@ -74,6 +74,7 @@ class Main extends Component {
             <Route path='/property-view/:title' component={PropertyView} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/rent-listing' component={RentListing} />
+            <Route exact path='/rent-listing/homedetails/:key/:id/:uid' component={RentListing} />
             <Route exact path='/homedetails' component={Listings} />
             <Route exact path='/homedetails/:key/:id' component={Listings} />
             <Route exact path='/homedetails/:key/:id/:uid' component={Listings} />

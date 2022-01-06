@@ -15,14 +15,11 @@ import image17 from "../../assets/images/17.png";
 import markerIcon from "../../assets/images/marker-icon.png";
 import { Link } from "react-router-dom";
 import mapboxgl, { MatGeocoder, MapboxCircle, TouchPitchHandler } from 'mapbox-gl';
-import * as MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import {mapboxToken} from '../../apiPaths';
 
 class MapProperty extends React.PureComponent {
   constructor(props) {
     super(props);
-
-    console.log('props', this.props);
-
     this.state = {
       lng: 40.20,
       lat: -74.73,
@@ -37,12 +34,12 @@ class MapProperty extends React.PureComponent {
 
   componentDidMount() {
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZWhvbWVvZmZlcm1hcHMiLCJhIjoiY2tqaW5mZGp6N282OTMycngzMjVveTR1byJ9.GO2cn4EGL2Q-78KiKa-z9g';
+    mapboxgl.accessToken = mapboxToken;
     const maps = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/streets-v11',
       center: [this.state.lat,this.state.lng],
-      zoom: 6,
+      zoom: 8,
     });
   
     const styles = {
@@ -138,7 +135,6 @@ class MapProperty extends React.PureComponent {
 
   }
   render() {
-    const { lng, lat, zoom } = this.state;
     return (
       <div ref={el => this.mapContainer = el} className="map-container" />
     );
