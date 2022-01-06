@@ -13,7 +13,7 @@ import { logger } from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './store/sagas';
 import rootReducer from "./store/reducers/Auth";
-
+import reportWebVitals from './reportWebVitals';
 
 const sagaMiddleware = createSagaMiddleware();
 const middlewareEnhancer = applyMiddleware(loggerMiddleware, thunkMiddleware);
@@ -33,6 +33,8 @@ render(
 );
 if (module.hot) module.hot.accept(App);
 
+reportWebVitals();
+serviceWorker.unregister();
 
 // ReactDOM.render(
 //  <Provider store={store}>

@@ -24,7 +24,7 @@ import BedIcon from "../../assets/images/bed_icon.png";
 import BathIcon from "../../assets/images/bath_icon.png";
 import FtIcon from "../../assets/images/ft_icon.png";
 import ScheduleCard from "./schduleCard";
-import { bePath } from "../../apiPaths";
+import { bePath, permitPath } from "../../apiPaths";
 
 import {
   FacebookShareButton,
@@ -50,6 +50,7 @@ const PropertyDetails = ({
   const [blogs, setblogs] = useState(null);
   const [provider, setProvider] = useState(null);
   const [showSocial, setShowSocial] = useState(false);
+  const [permitStatus, setPermitStatus] = useState(null);
 
   // for tabs
 
@@ -88,7 +89,7 @@ const PropertyDetails = ({
       const neighburhood = await axios.get(
         `https://krx6un8qv7.execute-api.ap-southeast-1.amazonaws.com/Testing_Stage?latitude=${myProperty.coordinates.latitude}&longitude=${myProperty.coordinates.longitude}`
       );
-      setNeighbors(neighburhood.data.result);
+      setNeighbors(neighburhood.data.result); 
     }
   }, [myProperty]);
 
@@ -118,6 +119,19 @@ const PropertyDetails = ({
             setRelatedResults(res.data.result.listing);
           }
         });
+
+      axios
+        .get(
+          permitPath +
+          "/permitRecords.php?singleProperty="
+          + myProperty.address.deliveryLine
+        )
+        .then((res) => {
+          console.log('response--property', res);
+          if (res.data.permit_records.status && res.data.permit_records.status.length) {
+            setPermitStatus(res.data.permit_records.status);
+          }
+        });
       // for getting similar homes
       axios
         .get(
@@ -126,7 +140,7 @@ const PropertyDetails = ({
           myProperty.market +
           "&extended=true&baths=" +
           myProperty?.baths?.total +
-          "&details=true&listingDate=>6/1/2015&beds=" +
+          "&address.state=NJ&details=true&listingDate=>6/1/2015&beds=" +
           myProperty?.beds
         )
         .then((res) => {
@@ -626,6 +640,16 @@ const PropertyDetails = ({
                       Price & Tax History
                     </a>
                   </li>
+                  <li
+                    className='eVYrJu'
+                    onClick={() => setActiveMenu("permitStatus")}>
+                    <a
+                      href='#permitStatus'
+                      className={`bhJxVt ${activeMenuhandler("permitStatus")}`}>
+                      Permit Records
+                    </a>
+                  </li>
+
                   {myProperty.schools && (
                     <li
                       className='eVYrJu'
@@ -1192,6 +1216,25 @@ const PropertyDetails = ({
               )}
             </div>
 
+            {
+              permitStatus && (
+                <div className='dHtGQa' id='permitStatus'>
+                  <h4 className='dTAnOx dZuCmF'>Permit Records</h4>
+                  <div className='eUOzkf'>
+                    <h5 className='bSxNCK'>
+                     Permit Data
+                    </h5>
+                    <div className='gtLCRl'>
+                      {permitStatus && (
+                        <div>Status: {permitStatus}</div>
+                      )}
+                    </div>
+                    <p className='fhpxsu'>
+                      If Permit records have available then it will Display here. 
+                    </p>
+                  </div>
+                </div>
+              )}
             {myProperty.schools && (
               <div className='dHtGQa' id='schools'>
                 <h4 className='dTAnOx dZuCmF'>Nearby schools in Marlboro</h4>
