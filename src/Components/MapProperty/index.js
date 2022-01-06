@@ -136,7 +136,7 @@ class MapProperty extends React.PureComponent {
   }
   render() {
     return (
-      <div ref={el => this.mapContainer = el} className="map-container" />
+      <div ref={el => this.mapContainer = el} className="map-container"/>
     );
   }
 }
