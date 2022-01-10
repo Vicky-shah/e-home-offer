@@ -293,7 +293,7 @@ class PropertyView extends Component {
       const subHeading = <div>Presented by: <a>KATRINA VITALE</a> with <a>{myProperty.listings && myProperty.listings[0] && myProperty.listings[0].xf_listofficename && myProperty.listings[0].xf_listofficename}</a></div>
       return (
             <>
-                <MyHeader heading={myProperty.listings && myProperty.listings[0] && myProperty.listings[0].address && myProperty.listings[0].address.deliveryLine} subHeading={subHeading} />
+                {/* <MyHeader heading={myProperty.listings && myProperty.listings[0] && myProperty.listings[0].address && myProperty.listings[0].address.deliveryLine} subHeading={subHeading} /> */}
                 <div className="property-view">
                     <section className="slider-form-sec">
                         <div className="auto-container">

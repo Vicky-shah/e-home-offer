@@ -324,10 +324,10 @@ class Listings extends Component {
 
         return (
             <>
-                <MyHeader
+                {/* <MyHeader
                     heading="Looking For A New Home"
                     subHeading="Don’t worry eHomeoffer has you covered with many options"
-                />
+                /> */}
                 <section className="search-form-area">
                     <div className="container-fluid">
                         <div className="right-button">

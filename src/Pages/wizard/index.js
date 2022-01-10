@@ -61,10 +61,10 @@ const Index = () => {
 
   return (
     <>
-      <Header
+      {/* <Header
         heading="Looking For A New Home"
         subHeading="Don’t worry eHomeoffer has you covered with many options"
-      />
+      /> */}
       {!loader && property ? (
         <div className="wizard">
           {step === 0 && (

@@ -183,7 +183,7 @@ class FavoritePage extends Component {
      
         return (
             <>
-                <MyHeader />
+                {/* <MyHeader /> */}
                 <div className="favourite-view">
 
                   <div className="home-detail-area">

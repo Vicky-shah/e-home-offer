@@ -95,10 +95,10 @@ function ListPage(props) {
 
     return (
         <>
-            <MyHeader
+            {/* <MyHeader
                 heading="Heading for the list page"
                 subHeading="subHeading for list Page"
-            />
+            /> */}
             <div>
                 <Grid container component="main">
                     <Grid
